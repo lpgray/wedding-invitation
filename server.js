@@ -81,7 +81,7 @@ function getWxPublicConfig(url, callback) {
 
 var fileName = process.env.NODE_ENV === 'production' ? 'wishes_production' : 'wishes';
 var wishesData = [];
-var PORT = process.env.PORT || 8080;
+var PORT = process.env.PORT || 8081;
 
 if (fs.existsSync('./' + fileName)) {
   var str = fs.readFileSync('./' + fileName);
