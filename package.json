@@ -4,9 +4,9 @@
   "description": "This is my wedding invitation project",
   "scripts": {
     "build": "gulp",
-    "develop": "gulp develop",
-    "start": "NODE_ENV=production node server",
-    "pm2": "pm2 start ecosystem.config.js --env production"
+    "less": "gulp develop",
+    "develop": "node server",
+    "start": "pm2 start ecosystem.config.js --env production"
   },
   "author": {
     "email": "px.zhangyang@gmail.com",
