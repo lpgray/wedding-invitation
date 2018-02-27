@@ -1,6 +1,36 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var fs = require('fs');
+var request = require('request');
+
+var wxAccessToken = '';
+var wxAccessTokenTimer, wxAccessTokenLastTimeGot = 0;
+var wxConfig = {
+  appId: 'wxa371f2237d652ce1',
+  appSecret: 'c57057a76d90e764bf5f88269022328c'
+};
+function requestWxAccessToken(callback) {
+  if (wxAccessToken && Date.now() - wxAccessTokenLastTimeGot <= 7200000) {
+    callback(wxAccessToken);
+    return;
+  }
+  request(
+    'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=' + wxConfig.appId + '&secret=' + wxConfig.appSecret,
+    function(err, res, body) {
+      if (!err) {
+        var data = JSON.parse(body);
+        if (data.errcode) {
+          callback('');
+        } else {
+          wxAccessToken = data.access_token;
+          wxAccessTokenLastTimeGot = Date.now();
+          callback(wxAccessToken);
+        }
+      }
+    }
+  );
+}
+
 
 var fileName = process.env.NODE_ENV === 'production' ? 'wishes_production' : 'wishes';
 var wishesData = [];

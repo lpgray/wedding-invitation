@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="./lib/swiper/css/swiper.min.css">
     <link rel="stylesheet" href="./css/app.css">
     <script src="http://webapi.amap.com/maps?v=1.4.4&key=fd61045fc105845b0afb4bb0e6014596"></script>
-    <!-- <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script> -->
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
     <!--[if lte IE 9]>
     <script>window.location.href = 'error.html';</script>
     <![endif]-->
@@ -45,7 +45,7 @@
                 <div class="inner">
                     <div class="avatars">
                         <div class="male">
-                            <div id="J-MaleAvatar" data-delay="0" data-animate="rotateInUpLeft" class="animate animate-init avatar">
+                            <div id="J-MaleAvatar" data-delay="0" class="animate animate-init avatar">
                                 <img src="http://7xq1q6.com1.z0.glb.clouddn.com/male.png" alt="">
                             </div>
                             <h3 class="animate animate-init" data-delay="300">张杨</h3>
@@ -54,7 +54,7 @@
                             <h3 class="animate animate-init" data-delay="300">&</h3>
                         </div>
                         <div class="female">
-                            <div id="J-FemaleAvatar" data-delay="0" data-animate="rotateInUpRight" class="animate animate-init avatar">
+                            <div id="J-FemaleAvatar" data-delay="0" class="animate animate-init avatar">
                                 <img src="http://7xq1q6.com1.z0.glb.clouddn.com/female.jpg" alt="">
                             </div>
                             <h3 class="animate animate-init" data-delay="300">甘会丽</h3>
@@ -86,7 +86,7 @@
                         <p>共同见证幸福时刻</p>
                     </div>
                     <div id="J-Map" class="map-container"></div>
-                    <a class="button  animate animate-init" data-animate="bounceIn" href="http://m.amap.com/navi/?dest=116.949093,34.728785&destName=回味从前&hideRouteIcon=1&key=fd61045fc105845b0afb4bb0e6014596">导航前往</a>
+                    <a onClick="openMap();return false;" class="button  animate animate-init" data-animate="bounceIn" href="http://m.amap.com/navi/?dest=116.949093,34.728785&destName=回味从前&key=fd61045fc105845b0afb4bb0e6014596">导航前往</a>
                 </div>
             </div>
             <!-- ./地址 -->
@@ -154,14 +154,14 @@
                         <span>--</span> 分
                         <span>--</span> 秒
                     </p> -->
-                    <img class="animate animate-init" data-animate="zoomIn" data-delay="300" src="http://7xq1q6.com1.z0.glb.clouddn.com/wedding/about-big.png"
+                    <img class="animate animate-init" data-animate="zoomIn" data-delay="300" src="http://7o52me.com1.z0.glb.clouddn.com/white-1.jpg"
                         alt="">
                     <!-- <p class="tc animate animate-init" data-delay="800">致最好的我们</p> -->
                     <p class="body animate animate-init" data-delay="600">
                         近四年来，经历了很多，这个世界很小，让我们就这样相遇。这个世界又很大，分开即再见。一直期待着我们的婚礼，幻想着长长的头纱，遮住你美丽的脸，幻想你走过缀满花瓣的舞台，走向我，身后的花，朵朵绽放，终于，3月24日，我将迎娶你，我最爱的你，一直都是你。
                     </p>
                     <div class="br"></div>
-                    <a href="javascript:;" onclick="showMorePhotos()" class="button animate animate-init" data-delay="1000">更多婚纱照</a>
+                    <a href="javascript:;" onclick="showMorePhotos()" class="button animate animate-init" data-delay="1000">幸福时刻</a>
                     <div class="bf bf-4"></div>
                 </div>
             </div>
@@ -209,6 +209,7 @@
             </div>
             <div id="J-PhotosSwiperPagin" class="swiper-pagination"></div>
         </div>
+        <div id="J-PhotosToast" class="toast">轻触任意位置可以返回</div>
     </div>
 
     <!-- 版权声明 -->

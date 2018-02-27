@@ -70,9 +70,9 @@
     'http://7xq1q6.com1.z0.glb.clouddn.com/wedding/1-n.jpg',
     'http://7xq1q6.com1.z0.glb.clouddn.com/wedding/2.jpg',
     'http://7xq1q6.com1.z0.glb.clouddn.com/wedding/3.jpg',
-    'http://7xq1q6.com1.z0.glb.clouddn.com/wedding/4.jpg',
+    'http://7o52me.com1.z0.glb.clouddn.com/black-1.jpg',
     'http://7xq1q6.com1.z0.glb.clouddn.com/wedding/5.jpg',
-    'http://7xq1q6.com1.z0.glb.clouddn.com/wedding/6.jpg',
+    'http://7o52me.com1.z0.glb.clouddn.com/white-2.jpg',
     'http://7xq1q6.com1.z0.glb.clouddn.com/wedding/7.jpg',
     'http://7xq1q6.com1.z0.glb.clouddn.com/wedding/8.jpg',
     'http://7xq1q6.com1.z0.glb.clouddn.com/wedding/9.jpg',
@@ -363,9 +363,20 @@
         }
       }
     });
+    $('#J-PhotosToast').animateCss('fadeOut', function() {
+      $('#J-PhotosToast').remove();
+    });
   }
   glb.hodeMorePhotos = function() {
     $('.more-photos').hide();
+  }
+  glb.openMap = function() {
+    wx.openLocation({
+      latitude: 34.728785, // 纬度，浮点数，范围为90 ~ -90
+      longitude: 116.949093, // 经度，浮点数，范围为180 ~ -180。
+      name: '回味从前', // 位置名
+      scale: 10, // 地图缩放级别,整形值,范围从1~28。默认为最大
+    });
   }
   glb.sendWish = sendWish;
 
