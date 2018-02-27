@@ -116,8 +116,8 @@ var app = express();
 app.use(bodyParser.urlencoded({ extended: false }));  // parse application/x-www-form-urlencoded
 app.use(bodyParser.json());  // parse application/json
 app.use(express.static('./public'));
-app.get('/wxconfig', function(req, res) {
-  getWxPublicConfig(req.query.url, function(config) {
+app.post('/wxconfig', function(req, res) {
+  getWxPublicConfig(req.body.url, function(config) {
     res.json({
       success: true,
       data: config

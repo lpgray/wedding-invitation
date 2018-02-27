@@ -384,7 +384,7 @@
   // TODO: 微信分享封面图
   function initWx() {
     const url = location.href.split('#')[0];
-    $.get('/wxconfig?url=' + url, function(res) {
+    $.post('/wxconfig', { url: url }, function(res) {
       wx.config({
         debug: location.search.indexOf('_debug_') > -1 ? true : false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
         appId: res.data.appId,
