@@ -4,3 +4,4 @@ node_modules
 wishes
 wishes_production
 *.mp3
+package-lock.json
