@@ -221,7 +221,7 @@
       return;
     }
     // setup garden
-    var $window = $(window),gardenCtx, gardenCanvas, $garden, garden;
+    var $window = $(window), gardenCtx, gardenCanvas, $garden, garden;
     var clientWidth = $(window).width();
     var clientHeight = $(window).height();
     var $loveHeart = $("#loveHeart");
@@ -258,7 +258,7 @@
       var y = -20 * (13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t));
       return new Array(offsetX + x, offsetY + y);
     }
-    
+
     function startHeartAnimation() {
       var interval = 50;
       var angle = 10;
@@ -287,7 +287,7 @@
     }
 
     var offsetX = $("#loveHeart").width() / 2;
-		var offsetY = $("#loveHeart").height() / 2 - 55;
+    var offsetY = $("#loveHeart").height() / 2 - 55;
     startHeartAnimation();
     heartInited = true;
   }
@@ -370,5 +370,13 @@
   glb.sendWish = sendWish;
 
   // TODO: 微信分享封面图
+  // wx.config({
+  //   debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+  //   appId: '', // 必填，公众号的唯一标识
+  //   timestamp: , // 必填，生成签名的时间戳
+  //   nonceStr: '', // 必填，生成签名的随机串
+  //   signature: '',// 必填，签名
+  //   jsApiList: [] // 必填，需要使用的JS接口列表
+  // });
 
 }(window.jQuery, window));
