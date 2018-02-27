@@ -1,0 +1,585 @@
+@keyframes bf {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, 10px, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+@keyframes bfRotate {
+  0% {
+    transform: rotate(10deg);
+  }
+  25% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(-10deg);
+  }
+  75% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(10deg);
+  }
+}
+@keyframes musicButton {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  50% {
+    -webkit-transform: rotate(180deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+html,
+body {
+  background-color: #fcfafa;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: 12px;
+  color: #444;
+  overflow: hidden;
+  height: 100%;
+}
+* {
+  box-sizing: border-box;
+}
+.tc {
+  text-align: center;
+}
+.tr {
+  text-align: right;
+}
+.clearfix:before,
+.clearfix:after {
+  content: " ";
+  display: block;
+  overflow: hidden;
+  clear: both;
+}
+.button {
+  display: block;
+  text-decoration: none;
+  border: 1px solid #a2c0eb;
+  background-color: #fff;
+  width: 200px;
+  height: 40px;
+  border-radius: 4px;
+  line-height: 38px;
+  text-align: center;
+  letter-spacing: 2px;
+  margin: 0 auto;
+  font-size: 14px;
+  color: #4452c0;
+  outline: none;
+}
+.button-small {
+  height: 30px;
+  line-height: 28px;
+  width: 70px;
+  font-size: 13px;
+  display: inline-block;
+}
+.button-secondary {
+  color: #9296b5;
+}
+.button:active {
+  background-color: #f5f5f5;
+}
+.input {
+  display: block;
+  margin: 0 auto;
+  border: 1px solid #a2c0eb;
+  background-color: #fff;
+  width: 8rem;
+  border-radius: 4px;
+  padding: 8px;
+  font-size: 14px;
+  outline: none;
+}
+.input:focus {
+  border-color: #4452c0;
+}
+.input-textarea {
+  min-height: 2rem;
+  max-height: 2rem;
+}
+.form-row {
+  width: 8rem;
+  margin: 0 auto;
+}
+div.br {
+  height: .3rem;
+}
+span.cell-split {
+  width: .2rem;
+  display: inline-block;
+}
+.animate-init {
+  visibility: hidden;
+}
+.icon-music {
+  position: fixed;
+  width: 30px;
+  height: 30px;
+  background: url(http://7xq1q6.com1.z0.glb.clouddn.com/wedding/icon-music.png) center center no-repeat;
+  background-size: 100%;
+  z-index: 5;
+  top: 1rem;
+  right: 1rem;
+}
+.icon-music-animate {
+  animation: musicButton 5s linear infinite;
+}
+.preface {
+  position: fixed;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: #fff;
+}
+.love-heart {
+  width: 670px;
+  height: 625px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -335px;
+  margin-top: -325px;
+  opacity: .7;
+}
+.love-heart .garden {
+  width: 100%;
+  height: 100%;
+}
+.love-clock-wrap {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  top: 5.7rem;
+  left: 0;
+  color: #444;
+  font-size: 14px;
+}
+.love-clock-wrap .love-clock span {
+  color: #4452c0;
+  opacity: .7;
+}
+.develop-by {
+  position: absolute;
+  bottom: 1rem;
+  left: 0;
+  width: 100%;
+  text-align: center;
+}
+.frame {
+  position: relative;
+  overflow: hidden;
+}
+.frame:before,
+.frame:after {
+  content: " ";
+  display: block;
+  overflow: hidden;
+  clear: both;
+}
+.frame:before,
+.frame:after {
+  content: " ";
+  display: block;
+  overflow: hidden;
+  clear: both;
+}
+.frame h2 {
+  font-size: 20px;
+  color: #131313;
+  text-align: center;
+  font-weight: normal;
+  font-family: Arial, Helvetica, serif;
+  position: relative;
+  z-index: 2;
+  margin: 1rem 0;
+}
+.frame h2:after {
+  content: " ";
+  width: 4rem;
+  height: 0.5rem;
+  background-image: linear-gradient(to left, #f8f5f8, #e7f1f8);
+  display: block;
+  margin: -0.3rem auto 0;
+}
+.frame > .inner {
+  position: relative;
+  z-index: 2;
+}
+.frame > .frame-borders {
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+.frame > .frame-borders:before,
+.frame > .frame-borders:after,
+.frame > .frame-borders .bottom:before,
+.frame > .frame-borders .bottom:after {
+  content: " ";
+  width: 88.5px;
+  height: 88.5px;
+  background: url(http://7xq1q6.com1.z0.glb.clouddn.com/wedding/corner.jpg) left top no-repeat;
+  background-size: 100%;
+  position: absolute;
+  left: 0.2rem;
+  top: 0.2rem;
+}
+.frame > .frame-borders:after {
+  transform: rotate(-270deg);
+  left: auto;
+  right: 0.2rem;
+}
+.frame > .frame-borders .bottom:before {
+  transform: rotate(-90deg);
+  top: auto;
+  bottom: 0.2rem;
+}
+.frame > .frame-borders .bottom:after {
+  transform: rotate(-180deg);
+  top: auto;
+  left: auto;
+  right: 0.2rem;
+  bottom: 0.2rem;
+}
+.footer {
+  margin-bottom: 1rem;
+}
+.swiper-container {
+  width: 100%;
+  height: 100%;
+}
+.swiper-container .swiper-pagination-bullet-active {
+  background: #6a75cd;
+}
+.bf {
+  position: absolute;
+  z-index: 4;
+  background: transparent center center no-repeat;
+  background-size: 100%;
+  top: 0;
+  left: 0;
+  width: 63px;
+  height: 63px;
+}
+.frame-1 {
+  font-family: Arial, Helvetica, serif;
+}
+.frame-1 .inner {
+  position: relative;
+}
+.frame-1 .avatars {
+  display: flex;
+  justify-content: center;
+}
+.frame-1 .avatars .male,
+.frame-1 .avatars .female {
+  text-align: center;
+  width: 155px;
+}
+.frame-1 .avatars .male .avatar,
+.frame-1 .avatars .female .avatar {
+  height: 155px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+.frame-1 .avatars .male .avatar:after,
+.frame-1 .avatars .female .avatar:after {
+  content: " ";
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+  background: url(http://7xq1q6.com1.z0.glb.clouddn.com/wedding/fcircle-2.png) center center no-repeat;
+  background-size: 100%;
+}
+.frame-1 .avatars .male .avatar img,
+.frame-1 .avatars .female .avatar img {
+  width: 122px;
+  height: 122px;
+  border-radius: 50%;
+  position: relative;
+  z-index: 2;
+}
+.frame-1 .avatars .and {
+  padding-top: 155px;
+}
+.frame-1 .avatars .male .avatar:after {
+  background-image: url(http://7xq1q6.com1.z0.glb.clouddn.com/wedding/fcircle-1.png);
+}
+.frame-1 .avatars h3 {
+  font-size: 20px;
+}
+.frame-1 .desc {
+  text-align: center;
+  font-size: 16px;
+  height: 7rem;
+  display: flex;
+  flex-direction: column;
+}
+.frame-1 .desc h4 {
+  font-size: 14px;
+  color: #131313;
+  text-align: center;
+  font-weight: bolder;
+  position: relative;
+  z-index: 2;
+  margin: 1rem 0;
+}
+.frame-1 .desc h4:after {
+  content: " ";
+  width: 4rem;
+  height: 0.5rem;
+  background-color: #ecf0fa;
+  display: block;
+  margin: -0.3rem auto 0;
+}
+.frame-1 .desc p {
+  margin: 0;
+  flex: 1;
+}
+.frame-1 .desc strong {
+  color: #4452c0;
+}
+.frame-1 .bf-1 {
+  background-image: url(http://7xq1q6.com1.z0.glb.clouddn.com/wedding/bf1.png);
+  top: 0;
+  left: .2rem;
+  animation: bf 2s linear infinite;
+}
+.frame-1 .bf-2 {
+  background-image: url(http://7xq1q6.com1.z0.glb.clouddn.com/wedding/bf2.png);
+  top: 3rem;
+  right: 1rem;
+  left: auto;
+  animation: bf 2s .2s linear infinite;
+}
+.frame-2 .map-container {
+  width: 8rem;
+  height: 4rem;
+  margin: 0 auto 1rem;
+  border: 1px solid #eee;
+  overflow: hidden;
+  border-radius: 4px;
+}
+.frame-2 .desc {
+  text-align: center;
+  font-size: 16px;
+  height: 5rem;
+  display: flex;
+  flex-direction: column;
+}
+.frame-2 .desc p {
+  margin: 0;
+  flex: 1;
+}
+.frame-2 .desc strong {
+  color: #4452c0;
+}
+.frame-2 .bf-4 {
+  width: 60px;
+  height: 60px;
+  background-image: url(http://7xq1q6.com1.z0.glb.clouddn.com/wedding/bf4.png);
+  left: 1rem;
+  animation: bfRotate 2s .2s linear infinite;
+}
+.frame-3 .inner {
+  width: 8rem;
+  margin: auto;
+  position: relative;
+}
+.frame-3 .inner:after {
+  content: " ";
+  width: 80%;
+  height: 80%;
+  background-image: linear-gradient(to bottom, #f8f5f8, #e7f1f8);
+  border-radius: 4px;
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  margin-top: -60%;
+  margin-left: -40%;
+}
+.frame-3 .inner .bf-3 {
+  width: 60px;
+  height: 60px;
+  background-image: url(http://7xq1q6.com1.z0.glb.clouddn.com/wedding/bf3.png);
+  top: 0;
+  left: 1rem;
+  animation: bf 2s .2s linear infinite;
+}
+.frame-3 .floor {
+  display: flex;
+  position: relative;
+  z-index: 2;
+}
+.frame-3 .floor .cell {
+  flex: 1;
+  font-size: 0.32rem;
+  letter-spacing: 2px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.frame-3 .floor .cell p {
+  margin: 5px 0;
+}
+.frame-3 .floor .cell img {
+  width: 150px;
+  display: block;
+  border-radius: 4px;
+}
+.frame-3 .floor .cell-img {
+  text-align: center;
+}
+.frame-3 .floor:last-child {
+  margin-top: 0.5rem;
+}
+.frame-3 .floor2 .cell:last-child {
+  padding-left: 10px;
+}
+.frame-5 .inner {
+  width: 8rem;
+  margin: -0.5rem auto 0;
+  position: relative;
+}
+.frame-5 .inner:before,
+.frame-5 .inner:after {
+  content: " ";
+  width: 4rem;
+  height: 6rem;
+  background-image: linear-gradient(to bottom, #f8f5f8, #e7f1f8);
+  border-radius: 4px;
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: -0.5rem;
+}
+.frame-5 .inner:after {
+  top: auto;
+  left: auto;
+  bottom: 2rem;
+  right: -0.5rem;
+}
+.frame-5 .inner .bf-4 {
+  width: 60px;
+  height: 60px;
+  background-image: url(http://7xq1q6.com1.z0.glb.clouddn.com/wedding/bf4.png);
+  top: auto;
+  bottom: 0;
+  animation: bfRotate 2s .2s linear infinite;
+}
+.frame-5 .inner > p,
+.frame-5 .inner img,
+.frame-5 .inner a {
+  position: relative;
+  z-index: 2;
+}
+.frame-5 .inner p.tc {
+  font-size: 14px;
+  letter-spacing: 2px;
+}
+.frame-5 .inner p.body {
+  line-height: 1.8;
+  font-size: 13px;
+  text-indent: 26px;
+  letter-spacing: 1px;
+  color: #666;
+}
+.frame-5 .inner > img {
+  display: block;
+  width: 100%;
+  margin-top: .5rem;
+  margin-bottom: .5rem;
+  border-radius: 4px;
+}
+.frame-6 .inner {
+  width: 8rem;
+  margin: 0 auto;
+  position: relative;
+}
+.frame-6 .wishes {
+  height: 8rem;
+  background-color: #fff;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  padding: .5rem;
+  font-size: 14px;
+  line-height: 1.4;
+  overflow: hidden;
+}
+.frame-6 .wishes .name {
+  color: #4452c0;
+}
+.frame-6 .wishes ul {
+  position: relative;
+}
+.frame-6 ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.frame-6 ul li {
+  margin-bottom: .2rem;
+}
+.wish-form {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  z-index: 10;
+  display: none;
+}
+.wish-form .inner {
+  width: 8rem;
+  margin: 0 auto;
+}
+.more-photos {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #000000;
+  color: #fff;
+  z-index: 10;
+  display: none;
+}
+.more-photos .swiper-container {
+  width: 100%;
+  height: 100%;
+}
+.more-photos .swiper-container .swiper-pagination-bullet-active {
+  background: #fff;
+}
+.more-photos .swiper-container .swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.more-photos .swiper-container .swiper-slide img {
+  display: block;
+  max-width: 100%;
+}

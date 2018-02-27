@@ -1,0 +1,29 @@
+{
+  "name": "wedding-invitation",
+  "version": "1.0.0",
+  "description": "This is my wedding invitation project",
+  "scripts": {
+    "build": "gulp",
+    "develop": "gulp develop",
+    "start": "node server",
+    "pm2": "pm2 start ecosystem.config.js"
+  },
+  "author": {
+    "email": "px.zhangyang@gmail.com",
+    "name": "zhangyang"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-csso": "^3.0.0",
+    "gulp-less": "^3.3.2"
+  },
+  "dependencies": {
+    "animate.css": "^3.6.1",
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "jquery": "^3.3.1",
+    "koa": "^2.5.0",
+    "normalize.css": "^8.0.0",
+    "swiper": "^4.1.6"
+  }
+}

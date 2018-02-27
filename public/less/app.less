@@ -1,0 +1,576 @@
+@import "./lib/theme";
+@import "./lib/animate";
+
+html,
+body {
+    background-color: #fcfafa;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 12px;
+    color: #444;
+    overflow: hidden;
+    height: 100%;
+}
+
+* {
+    box-sizing: border-box
+}
+
+.tc {
+    text-align: center
+}
+.tr {
+    text-align: right;
+}
+
+.clearfix() {
+    &:before,
+    &:after {
+        content: " ";
+        display: block;
+        overflow: hidden;
+        clear: both;
+    }
+}
+
+.clearfix {
+    .clearfix();
+}
+
+.button {
+    display: block;
+    text-decoration: none;
+    border: 1px solid #a2c0eb;
+    background-color: #fff;
+    width: 200px;
+    height: 40px;
+    border-radius: 4px;
+    line-height: 38px;
+    text-align: center;
+    letter-spacing: 2px;
+    margin: 0 auto;
+    font-size: 14px;
+    color: @primary;
+    outline: none;
+    &-small {
+        height: 30px;
+        line-height: 28px;
+        width: 70px;
+        font-size: 13px;
+        display: inline-block;
+    }
+    &-secondary {
+        color: #9296b5;
+    }
+    &:active {
+        background-color: #f5f5f5;
+    }
+}
+
+.input {
+    display: block;
+    margin: 0 auto;
+    border: 1px solid #a2c0eb;
+    background-color: #fff;
+    width: 8rem;
+    border-radius: 4px;
+    padding: 8px;
+    font-size: 14px;
+    outline: none;
+    &:focus {
+        border-color: @primary
+    }
+    &-textarea {
+        min-height: 2rem;
+        max-height: 2rem;
+    }
+}
+.form-row {
+    width: 8rem;
+    margin: 0 auto;
+}
+
+div.br {
+    height: .3rem;
+}
+
+span.cell-split {
+    width: .2rem;
+    display: inline-block;
+}
+
+.animate {
+    &-init {
+        visibility: hidden;
+    }
+}
+
+.icon-music {
+    position: fixed;
+    width: 60/2px;
+    height: 60/2px;
+    background: url(http://7xq1q6.com1.z0.glb.clouddn.com/wedding/icon-music.png) center center no-repeat;
+    background-size: 100%;
+    z-index: 5;
+    top: 1rem;
+    right: 1rem;
+    &-animate {
+        animation: musicButton 5s linear infinite;
+    }
+}
+
+.preface {
+    position: fixed;
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: #fff;    
+}
+
+.love-heart {
+	width:670px;
+	height:625px;
+	position: absolute;
+	top:50%; left: 50%;
+	margin-left: -335px;
+    margin-top: -325px;
+    opacity: .7;
+    .garden {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.love-clock-wrap {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    top: 5.7rem;
+    left: 0;
+    color: #444;
+    font-size: 14px;
+    .love-clock {
+        span {
+            color: @primary;
+            opacity: .7;
+        }
+    }
+}
+
+.develop-by {
+    position: absolute;
+    bottom: 1rem;
+    left: 0;
+    width: 100%;
+    text-align: center;
+}
+
+
+.frame {
+    position: relative;
+    overflow: hidden;
+    .clearfix();
+    h2 {
+        font-size: 20px;
+        color: #131313;
+        text-align: center;
+        font-weight: normal;
+        font-family: Arial, Helvetica, serif;
+        position: relative;
+        z-index: 2;
+        margin: 1rem 0;
+        &:after {
+            content: " ";
+            width: 4rem;
+            height: 0.5rem;
+            background-image: linear-gradient(to left, #f8f5f8,#e7f1f8);
+            display: block;
+            margin: -0.3rem auto 0;
+        }
+    }
+    >.inner {
+        position: relative;
+        z-index: 2;
+    }
+    >.frame-borders {
+        position: absolute;
+        z-index: 1;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        &:before,
+        &:after,
+        .bottom:before,
+        .bottom:after {
+            content: " ";
+            width: 177/2px;
+            height: 177/2px;
+            background: url(http://7xq1q6.com1.z0.glb.clouddn.com/wedding/corner.jpg) left top no-repeat;
+            background-size: 100%;
+            position: absolute;
+            left: @border-margin;
+            top: @border-margin;
+        }
+        &:after {
+            transform: rotate(-270deg);
+            left: auto;
+            right: @border-margin;
+        }
+        .bottom:before {
+            transform: rotate(-90deg);
+            top: auto;
+            bottom: @border-margin;
+        }
+        .bottom:after {
+            transform: rotate(-180deg);
+            top: auto;
+            left: auto;
+            right: @border-margin;
+            bottom: @border-margin;
+        }
+    }
+}
+
+.footer {
+    margin-bottom: 1rem;
+}
+
+.swiper-container {
+    width: 100%;
+    height: 100%;
+    .swiper-pagination-bullet-active {
+        background: lighten(@primary, 10%);
+    }
+}
+
+.bf {
+    position: absolute;
+    z-index: 4;
+    background: transparent center center no-repeat;
+    background-size: 100%;
+    top: 0;
+    left: 0;
+    width: 126/2px;
+    height: 126/2px;
+}
+
+.frame-1 {
+    font-family: Arial, Helvetica, serif;
+    .inner {
+        position: relative;
+    }
+    .avatars {
+        display: flex;
+        justify-content: center;
+        .male,
+        .female {
+            text-align: center;
+            width: 310/2px;
+            .avatar {
+                height: 310/2px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                position: relative;
+                &:after {
+                    content: " ";
+                    position: absolute;
+                    z-index: 1;
+                    width: 100%;
+                    height: 100%;
+                    z-index: 3;
+                    background: url(http://7xq1q6.com1.z0.glb.clouddn.com/wedding/fcircle-2.png) center center no-repeat;
+                    background-size: 100%;
+                }
+                img {
+                    width: 244/2px;
+                    height: 244/2px;
+                    border-radius: 50%;
+                    position: relative;
+                    z-index: 2;
+                }
+            }
+        }
+        .and {
+            padding-top: 310/2px;
+        }
+        .male .avatar:after {
+            background-image: url(http://7xq1q6.com1.z0.glb.clouddn.com/wedding/fcircle-1.png);
+        }
+        h3 {
+            font-size: 20px;
+        }
+    }
+    .desc {
+        text-align: center;
+        font-size: 16px;
+        height: 7rem;
+        display: flex;
+        flex-direction: column;
+        h4 {
+            font-size: 14px;
+            color: #131313;
+            text-align: center;
+            font-weight: bolder;
+            position: relative;
+            z-index: 2;
+            margin: 1rem 0;
+            &:after {
+                content: " ";
+                width: 4rem;
+                height: 0.5rem;
+                background-color: #ecf0fa;
+                display: block;
+                margin: -0.3rem auto 0;
+            }
+        }
+        p {
+            margin: 0;
+            flex: 1;
+        }
+        strong {
+            color: @primary;
+        }
+    }
+    .bf-1 {
+        background-image: url(http://7xq1q6.com1.z0.glb.clouddn.com/wedding/bf1.png);
+        top: 0;
+        left: .2rem;
+        animation: bf 2s linear infinite;
+    }
+    .bf-2 {
+        background-image: url(http://7xq1q6.com1.z0.glb.clouddn.com/wedding/bf2.png);
+        top: 3rem;
+        right: 1rem;
+        left: auto;
+        animation: bf 2s .2s linear infinite;
+    }
+}
+
+.frame-2 {
+    .map-container {
+        width: 8rem;
+        height: 4rem;
+        margin: 0 auto 1rem;
+        border: 1px solid #eee;
+        overflow: hidden;
+        border-radius: 4px;
+    }
+    .desc {
+        text-align: center;
+        font-size: 16px;
+        height: 5rem;
+        display: flex;
+        flex-direction: column;
+        p {
+            margin: 0;
+            flex: 1;
+        }
+        strong {
+            color: @primary;
+        }
+    }
+    .bf-4 {
+        width: 120/2px;
+        height: 120/2px;
+        background-image: url(http://7xq1q6.com1.z0.glb.clouddn.com/wedding/bf4.png);
+        left: 1rem;
+        animation: bfRotate 2s .2s linear infinite;
+    }
+}
+
+.frame-3 {
+    .inner {
+        width: 8rem;
+        margin: auto;
+        position: relative;
+        &:after {
+            content: " ";
+            width: 80%;
+            height: 80%;
+            background-image: @linear-color;
+            border-radius: 4px;
+            position: absolute;
+            z-index: 1;
+            top: 50%;
+            left: 50%;
+            margin-top: -60%;
+            margin-left: -40%;
+        }
+        .bf-3 {
+            width: 120/2px;
+            height: 120/2px;
+            background-image: url(http://7xq1q6.com1.z0.glb.clouddn.com/wedding/bf3.png);
+            top: 0;
+            left: 1rem;
+            animation: bf 2s .2s linear infinite;
+        }
+    }
+    .floor {
+        display: flex;
+        position: relative;
+        z-index: 2;
+        .cell {
+            flex: 1;
+            font-size: 0.32rem;
+            letter-spacing: 2px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            p {
+                margin: 5px 0;
+            }
+            img {
+                width: 150px;
+                display: block;
+                border-radius: 4px;
+            }
+        }
+        .cell-img {
+            text-align: center;
+        }
+        &:last-child {
+            margin-top: 0.5rem;
+        }
+    }
+    .floor2 {
+        .cell:last-child {
+            padding-left: 10px;
+        }
+    }
+}
+
+.frame-5 {
+    .inner {
+        width: 8rem;
+        margin: -.5rem auto 0;
+        position: relative;
+        &:before,
+        &:after {
+            content: " ";
+            width: 4rem;
+            height: 6rem;
+            background-image: @linear-color;
+            border-radius: 4px;
+            position: absolute;
+            z-index: 1;
+            top: 0;
+            left: -.5rem;
+        }
+        &:after {
+            top: auto;
+            left: auto;
+            bottom: 2rem;
+            right: -.5rem;
+        }
+        .bf-4 {
+            width: 120/2px;
+            height: 120/2px;
+            background-image: url(http://7xq1q6.com1.z0.glb.clouddn.com/wedding/bf4.png);
+            top: auto;
+            bottom: 0;
+            animation: bfRotate 2s .2s linear infinite;
+        }
+        > p, img, a {
+            position: relative;
+            z-index: 2;
+        }
+        p.tc {
+            font-size: 14px;
+            letter-spacing: 2px;
+        }
+        p.body {
+            line-height: 1.8;
+            font-size: 13px;
+            text-indent: 26px;
+            letter-spacing: 1px;
+            color: #666;
+        }
+        >img {
+            display: block;
+            width: 100%;
+            margin-top: .5rem;
+            margin-bottom: .5rem;
+            border-radius: 4px;
+        }
+    }
+    
+}
+
+.frame-6 {
+    .inner {
+        width: 8rem;
+        margin: 0 auto;
+        position: relative;
+    }
+    .wishes {
+        height: 8rem;
+        background-color: #fff;
+        border: 1px solid #eee;
+        border-radius: 4px;
+        padding: .5rem;
+        font-size: 14px;
+        line-height: 1.4;
+        overflow: hidden;
+        .name {
+            color: @primary;
+        }
+        ul {
+            position: relative;
+        }
+    }
+    ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        li {
+            margin-bottom: .2rem;
+        }
+    }
+}
+
+.wish-form {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,.8);
+    color: #fff;
+    z-index: 10;
+    display: none;
+    .inner {
+        width: 8rem;
+        margin: 0 auto;
+    }
+}
+
+.more-photos {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,1);
+    color: #fff;
+    z-index: 10;
+    display: none;
+    .swiper-container {
+        width: 100%;
+        height: 100%;
+        .swiper-pagination-bullet-active {
+            background: #fff;
+        }
+        .swiper-slide {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            img {
+                display: block;
+                max-width: 100%;
+            }
+        }
+    }
+}
