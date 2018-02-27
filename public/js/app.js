@@ -72,13 +72,14 @@
     'http://7xq1q6.com1.z0.glb.clouddn.com/wedding/3.jpg',
     'http://7o52me.com1.z0.glb.clouddn.com/black-1.jpg',
     'http://7xq1q6.com1.z0.glb.clouddn.com/wedding/5.jpg',
-    'http://7o52me.com1.z0.glb.clouddn.com/white-2.jpg',
+    'http://7o52me.com1.z0.glb.clouddn.com/black-2.jpg',
+    'http://7o52me.com1.z0.glb.clouddn.com/add-1.jpeg',
     'http://7xq1q6.com1.z0.glb.clouddn.com/wedding/7.jpg',
     'http://7xq1q6.com1.z0.glb.clouddn.com/wedding/8.jpg',
     'http://7xq1q6.com1.z0.glb.clouddn.com/wedding/9.jpg',
     'http://7xq1q6.com1.z0.glb.clouddn.com/wedding/10.jpg',
     'http://7xq1q6.com1.z0.glb.clouddn.com/wedding/11.jpg',
-    'http://7xq1q6.com1.z0.glb.clouddn.com/wedding/12.jpg',
+    'http://7o52me.com1.z0.glb.clouddn.com/add-2.jpeg',
   ];
   var photoSwiper;
   var together = new Date();
