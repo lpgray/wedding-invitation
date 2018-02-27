@@ -2,16 +2,24 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var fs = require('fs');
 var request = require('request');
+var crypto = require('crypto');
 
 var wxAccessToken = '';
-var wxAccessTokenTimer, wxAccessTokenLastTimeGot = 0;
+var wxTicket = ''; // get by accesstoken
+var wxAccessTokenLastTimeGot = 0, wxTicketLastTimeGot = 0;
 var wxConfig = {
   appId: 'wxa371f2237d652ce1',
-  appSecret: 'c57057a76d90e764bf5f88269022328c'
+  appSecret: 'c57057a76d90e764bf5f88269022328c',
 };
-function requestWxAccessToken(callback) {
-  if (wxAccessToken && Date.now() - wxAccessTokenLastTimeGot <= 7200000) {
-    callback(wxAccessToken);
+var wxPublicConfig = {
+  appId: wxConfig.appId,
+  noncestr: 'zylpgray',
+  timestamp: 0,
+  signature: ''
+};
+function requestWxTicket(callback) {
+  if (wxTicket && (Date.now() - wxTicketLastTimeGot) <= 7200000) {
+    callback(wxTicket);
     return;
   }
   request(
@@ -20,17 +28,56 @@ function requestWxAccessToken(callback) {
       if (!err) {
         var data = JSON.parse(body);
         if (data.errcode) {
-          callback('');
+          callback();
         } else {
           wxAccessToken = data.access_token;
           wxAccessTokenLastTimeGot = Date.now();
-          callback(wxAccessToken);
+          console.log('wxAccessToken', wxAccessToken);
+          request(
+            'https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token='+ wxAccessToken +'&type=jsapi',
+            function(err, res, body) {
+              if (!err) {
+                var data = JSON.parse(body);
+                if (data.errcode) {
+                  callback();
+                } else {
+                  wxTicket = data.ticket;
+                  wxTicketLastTimeGot = Date.now();
+                  console.log('wxTicket', wxTicket);
+                  callback(wxTicket);
+                }
+              } else {
+                callback();
+              }
+            }
+          )
         }
       }
     }
   );
 }
+function getWxPublicConfig(url, callback) {
+  requestWxTicket(function() {
+    if (wxTicket && wxTicketLastTimeGot) {
+      wxPublicConfig.timestamp = wxTicketLastTimeGot;
 
+      var noncestr = wxPublicConfig.noncestr;
+      var jsapi_ticket = wxTicket;
+      var timestamp = wxTicketLastTimeGot;
+
+      var str = 'jsapi_ticket=' + jsapi_ticket + '&noncestr=' + noncestr + '&timestamp=' + timestamp + '&url=' + url;
+      var sha1 = crypto.createHash('sha1');
+      sha1.update(str);
+      var signature = sha1.digest('hex');
+      wxPublicConfig.signature = signature.toString();
+      console.log('str', str, ' / signature', wxPublicConfig.signature);
+      wxPublicConfig.timestamp = timestamp;
+      callback(wxPublicConfig);
+    } else {
+      callback({});
+    }
+  });
+}
 
 var fileName = process.env.NODE_ENV === 'production' ? 'wishes_production' : 'wishes';
 var wishesData = [];
@@ -69,6 +116,14 @@ var app = express();
 app.use(bodyParser.urlencoded({ extended: false }));  // parse application/x-www-form-urlencoded
 app.use(bodyParser.json());  // parse application/json
 app.use(express.static('./public'));
+app.get('/wxconfig', function(req, res) {
+  getWxPublicConfig(req.query.url, function(config) {
+    res.json({
+      success: true,
+      data: config
+    });
+  });
+});
 app.get('/wishes', function(req, res) {
   res.json({
     success: true,
@@ -88,3 +143,4 @@ app.post('/wishes', function(req, res) {
   });
 });
 app.listen(PORT);
+console.log('server listen on ' + PORT);
