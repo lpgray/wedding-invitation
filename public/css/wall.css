@@ -1,0 +1,100 @@
+.frame-wall {
+  overflow: hidden;
+}
+.frame-wall .wall-borders:before,
+.frame-wall .wall-borders:after,
+.frame-wall .wall-borders .bottom:before,
+.frame-wall .wall-borders .bottom:after {
+  width: 120px;
+  height: 120px;
+}
+.frame-wall h2 {
+  position: absolute;
+  z-index: 4;
+  font-size: 30px;
+  margin: 0;
+  width: 100%;
+  text-align: center;
+  top: 20px;
+  color: #6853a2;
+}
+.frame-wall h2::after {
+  height: 30px;
+  width: 300px;
+  display: none;
+}
+.frame-wall .inner {
+  padding: .8rem;
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+.frame-wall .wish-item {
+  font-size: 26px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 18px;
+  box-shadow: 0 10px 10px rgba(187, 187, 187, 0.2);
+  padding: .3rem;
+  line-height: 1.4;
+  margin-bottom: 20px;
+  border: 1px solid #eee;
+  overflow: hidden;
+}
+.frame-wall .wish-item .name {
+  color: #4452c0;
+}
+.frame-wall .wish-item .name:after {
+  content: "：";
+}
+.bottom-bar {
+  bottom: 0;
+  left: 0;
+  z-index: 5;
+  position: fixed;
+  width: 100%;
+  padding: 0;
+  box-shadow: 0 -8px 8px rgba(78, 78, 78, 0.2);
+}
+.bottom-bar .inner {
+  border-radius: 18px;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.bottom-bar .inner .qrcode-wrap {
+  background-color: #fff;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+  padding: 10px 10px 5px 10px;
+  height: 150px;
+}
+.bottom-bar .inner .qrcode-wrap img {
+  width: 110px;
+  height: 110px;
+  display: block;
+}
+.bottom-bar .inner .qrcode-wrap .desc {
+  font-size: 16px;
+  color: #7d87d3;
+  line-height: 1.6;
+  text-align: center;
+}
+.bottom-bar .inner .img-item-wrapper {
+  flex: 1;
+  height: 100%;
+  height: 150px;
+  background-color: #fff;
+  overflow: hidden;
+}
+.bottom-bar .inner .img-item-wrapper .img-item {
+  height: 100%;
+  background-position: center top;
+  background-size: cover;
+  background-repeat: no-repeat;
+  animation-duration: 1.5s;
+}

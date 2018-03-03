@@ -89,6 +89,10 @@
   together.setSeconds(0);
   together.setMilliseconds(0);
 
+  if (localStorage.getItem('name')) {
+    $name.val(localStorage.getItem('name'));
+  }
+
   $html.css('font-size', ($win.width() / 10) + 'px');
   appendFrameBorder($frames);
   initMap();

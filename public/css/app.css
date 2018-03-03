@@ -277,31 +277,25 @@ span.cell-split {
   width: 63px;
   height: 63px;
 }
-.frame-1 {
-  font-family: Arial, Helvetica, serif;
-}
-.frame-1 .inner {
-  position: relative;
-}
-.frame-1 .avatars {
+.avatars {
   display: flex;
   justify-content: center;
 }
-.frame-1 .avatars .male,
-.frame-1 .avatars .female {
+.avatars .male,
+.avatars .female {
   text-align: center;
   width: 155px;
 }
-.frame-1 .avatars .male .avatar,
-.frame-1 .avatars .female .avatar {
+.avatars .male .avatar,
+.avatars .female .avatar {
   height: 155px;
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
 }
-.frame-1 .avatars .male .avatar:after,
-.frame-1 .avatars .female .avatar:after {
+.avatars .male .avatar:after,
+.avatars .female .avatar:after {
   content: " ";
   position: absolute;
   z-index: 1;
@@ -313,22 +307,28 @@ span.cell-split {
   top: 0;
   left: 0;
 }
-.frame-1 .avatars .male .avatar img,
-.frame-1 .avatars .female .avatar img {
+.avatars .male .avatar img,
+.avatars .female .avatar img {
   width: 122px;
   height: 122px;
   border-radius: 50%;
   position: relative;
   z-index: 2;
 }
-.frame-1 .avatars .and {
+.avatars .and {
   padding-top: 155px;
 }
-.frame-1 .avatars .male .avatar:after {
+.avatars .male .avatar:after {
   background-image: url(http://7xq1q6.com1.z0.glb.clouddn.com/wedding/fcircle-1.png);
 }
-.frame-1 .avatars h3 {
+.avatars h3 {
   font-size: 20px;
+}
+.frame-1 {
+  font-family: Arial, Helvetica, serif;
+}
+.frame-1 .inner {
+  position: relative;
 }
 .frame-1 .desc {
   text-align: center;
@@ -599,4 +599,112 @@ span.cell-split {
   z-index: 11;
   animation-duration: 2s;
   animation-delay: 1s;
+}
+.copyright {
+  text-align: center;
+  color: #bbb;
+  position: fixed;
+  width: 100%;
+  bottom: 1rem;
+  left: 0;
+}
+.frame-wall {
+  overflow: hidden;
+}
+.frame-wall .wall-borders:before,
+.frame-wall .wall-borders:after,
+.frame-wall .wall-borders .bottom:before,
+.frame-wall .wall-borders .bottom:after {
+  width: 120px;
+  height: 120px;
+}
+.frame-wall h2 {
+  position: absolute;
+  z-index: 4;
+  font-size: 30px;
+  margin: 0;
+  width: 100%;
+  text-align: center;
+  top: 20px;
+  color: #6853a2;
+}
+.frame-wall h2::after {
+  height: 30px;
+  width: 300px;
+  display: none;
+}
+.frame-wall .inner {
+  padding: .8rem;
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+.frame-wall .wish-item {
+  font-size: 26px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 18px;
+  box-shadow: 0 10px 10px rgba(187, 187, 187, 0.2);
+  padding: .3rem;
+  line-height: 1.4;
+  margin-bottom: 20px;
+  border: 1px solid #eee;
+  overflow: hidden;
+}
+.frame-wall .wish-item .name {
+  color: #4452c0;
+}
+.frame-wall .wish-item .name:after {
+  content: "：";
+}
+.bottom-bar {
+  bottom: 0;
+  left: 0;
+  z-index: 5;
+  position: fixed;
+  width: 100%;
+  padding: 0;
+  box-shadow: 0 -8px 8px rgba(78, 78, 78, 0.2);
+}
+.bottom-bar .inner {
+  border-radius: 18px;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.bottom-bar .inner .qrcode-wrap {
+  background-color: #fff;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+  padding: 10px 10px 5px 10px;
+  height: 150px;
+}
+.bottom-bar .inner .qrcode-wrap img {
+  width: 110px;
+  height: 110px;
+  display: block;
+}
+.bottom-bar .inner .qrcode-wrap .desc {
+  font-size: 16px;
+  color: #7d87d3;
+  line-height: 1.6;
+  text-align: center;
+}
+.bottom-bar .inner .img-item-wrapper {
+  flex: 1;
+  height: 100%;
+  height: 150px;
+  background-color: #fff;
+  overflow: hidden;
+}
+.bottom-bar .inner .img-item-wrapper .img-item {
+  height: 100%;
+  background-position: center top;
+  background-size: cover;
+  background-repeat: no-repeat;
+  animation-duration: 1.5s;
 }

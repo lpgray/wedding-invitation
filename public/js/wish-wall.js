@@ -1,0 +1,183 @@
+(function($, glb) {
+  'use strict';
+
+  // 动画插件 from https://daneden.github.io/animate.css/
+  $.fn.extend({
+    animateCss: function(animationName, callback) {
+      var animationEnd = (function(el) {
+        var animations = {
+          animation: 'animationend',
+          OAnimation: 'oAnimationEnd',
+          MozAnimation: 'mozAnimationEnd',
+          WebkitAnimation: 'webkitAnimationEnd',
+        };
+
+        for (var t in animations) {
+          if (el.style[t] !== undefined) {
+            return animations[t];
+          }
+        }
+      })(document.createElement('div'));
+
+      this.removeClass('animate-init').addClass('animated ' + animationName).one(animationEnd, function() {
+        $(this).removeClass('animated ' + animationName);
+
+        if (typeof callback === 'function') callback();
+      });
+
+      return this;
+    },
+    makeAnimate: function() {
+      this.timeout = [];
+      var _ = this;
+      this.find('.animate').each(function(i) {
+        var $this = $(this);
+        var delay = Number($this.data('delay'));
+        var animateName = $this.data('animate') || 'flipInX';
+        if (animateName) {
+          if (delay === 0) {
+            $this.animateCss(animateName);
+          } else {
+            _.timeout[i] = setTimeout(function() {
+              $this.animateCss(animateName);
+            }, delay);
+          }
+        }
+      });
+      return this;
+    },
+    resetAnimate: function() {
+      if (this.timeout) {
+        this.timeout.forEach(function(i) {
+          clearTimeout(this.timeout[i]);
+        });
+      }
+      this.find('.animate').each(function() {
+        var $this = $(this);
+        $this.addClass('animate-init');
+      });
+      return this;
+    }
+  });
+
+  var $html = $('html');
+  var $body = $('body');
+  var $win = $(window);
+  var $frames = $('.frame');
+  var wishes = [];
+  var photos = [
+    'http://7xq1q6.com1.z0.glb.clouddn.com/wedding/1-n.jpg',
+    'http://7xq1q6.com1.z0.glb.clouddn.com/wedding/h-1.jpg',
+    'http://7xq1q6.com1.z0.glb.clouddn.com/wedding/3.jpg',
+    'http://7o52me.com1.z0.glb.clouddn.com/black-1.jpg',
+    'http://7xq1q6.com1.z0.glb.clouddn.com/wedding/h-2.jpg',
+    'http://7o52me.com1.z0.glb.clouddn.com/black-2.jpg',
+    'http://7xq1q6.com1.z0.glb.clouddn.com/wedding/h-3.jpg',
+    'http://7xq1q6.com1.z0.glb.clouddn.com/wedding/7.jpg',
+    'http://7xq1q6.com1.z0.glb.clouddn.com/wedding/h-4.jpg',
+    'http://7xq1q6.com1.z0.glb.clouddn.com/wedding/h-5.jpg',
+    'http://7xq1q6.com1.z0.glb.clouddn.com/wedding/10.jpg',
+    'http://7xq1q6.com1.z0.glb.clouddn.com/wedding/h-6.jpg',
+    'http://7o52me.com1.z0.glb.clouddn.com/add-2.jpeg',
+  ];
+  var photosPauseTime = 5000;
+
+  $html.css('font-size', ($win.width() / 10) + 'px');
+  $('#J-MainFrame').css('height', ($body.height() - 150));
+  appendFrameBorder($frames);
+  requestWishes();
+  startShowImgs();
+
+  function appendFrameBorder($frames) {
+    var $borders = $('<div class="frame-borders wall-borders"><div class="bottom"></div></div>');
+    $frames.each(function() {
+      $(this).append($borders.clone());
+    });
+  }
+
+  function requestWishes() {
+    $.get('/wishes', function(res) {
+      if (res.success) {
+        onGetWishes(res);
+        setTimeout(scrollWishes, 1000);
+      }
+    }, 'json');
+  }
+
+  function onGetWishes(res) {
+    var tmpl = '';
+    wishes = res.data;
+    for (var i = 0, l = wishes.length; i < l; i++) {
+      tmpl += '<div class="wish-item wish-item-' + i + '">';
+      tmpl += '<span class="name">' + wishes[i].name + '</span>';
+      tmpl += '<span class="body">' + wishes[i].text + '</span>';
+      tmpl += '</div>';
+
+      if (i === 0) {
+        tmpl += '<div class="wish-item-subs-wrap">'
+      }
+    }
+    tmpl += '</div>';
+    $('#J-Wishes').html(tmpl);
+  }
+
+  function scrollWishes() {
+    $('.wish-item-0').animateCss('fadeOut', function() {
+      var h = $('.wish-item-0').outerHeight() + 20;
+      $('.wish-item-0').css('visibility', 'hidden');
+      $('.wish-item-subs-wrap').css({
+        'transform': 'translate3d(0, -' + h + 'px, 0)',
+        'transition': 'all .5s ease'
+      }).on('transitionend', function() {
+        wishes.splice(0, 1);
+        if (wishes.length <= 0) {
+          requestWishes();
+          return;
+        }
+        onGetWishes({ data: wishes });
+        setTimeout(scrollWishes, 1000);
+      });
+    });
+  }
+
+  function startShowImgs() {
+    setTimeout(showImgs, photosPauseTime);
+  }
+
+  var anchor = 0;
+  function showImgs() {
+    var img = new Image();
+    var lastIdx = $('#J-Img0').data('last-url-index');
+    var idx = typeof lastIdx !== 'undefined' ? lastIdx + 2 : anchor;
+    if (idx >= photos.length) {
+      idx = 0;
+    }
+    var imgUrl = photos[idx];
+    img.onload = function() {
+      $('#J-Img0').animateCss('fadeOut', function() {
+        $('#J-Img0').css({
+          'background-image': 'url(' + imgUrl + ')'
+        }).animateCss('fadeIn').data('last-url-index', idx);
+      });
+    }
+    img.src = imgUrl;
+
+    var img1 = new Image();
+    var lastIdx1 = $('#J-Img1').data('last-url-index');
+    var idx1 = typeof lastIdx1 !== 'undefined' ? lastIdx1 + 2 : anchor + 1;
+    if (idx1 >= photos.length) {
+      idx1 = 1;
+    }
+    var img1Url = photos[idx1];
+    img1.onload = function() {
+      $('#J-Img1').animateCss('fadeOut', function() {
+        $('#J-Img1').css({
+          'background-image': 'url(' + img1Url + ')'
+        }).animateCss('fadeIn').data('last-url-index', idx1);
+        setTimeout(showImgs, photosPauseTime);
+      });
+    }
+    img1.src = img1Url;
+  }
+
+}(window.jQuery, window));
