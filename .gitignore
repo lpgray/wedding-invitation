@@ -5,3 +5,4 @@ wishes
 wishes_production
 *.mp3
 package-lock.json
+.env

@@ -4,12 +4,14 @@ var fs = require('fs');
 var request = require('request');
 var crypto = require('crypto');
 
+require('dotenv').config();
+
 var wxAccessToken = '';
 var wxTicket = ''; // get by accesstoken
 var wxAccessTokenLastTimeGot = 0, wxTicketLastTimeGot = 0;
 var wxConfig = {
-  appId: 'wxa371f2237d652ce1',
-  appSecret: 'c57057a76d90e764bf5f88269022328c',
+  appId: process.env.WX_APP_ID,
+  appSecret: process.env.WX_APP_SECRET,
 };
 var wxPublicConfig = {
   appId: wxConfig.appId,
@@ -141,6 +143,12 @@ app.post('/wishes', function(req, res) {
     success: true,
     data: reverse(wishesData)
   });
+});
+app.get('/red-pack', function(req, res) {
+
+});
+app.post('/red-pack', function(req, res) {
+
 });
 app.listen(PORT);
 console.log('server listen on ' + PORT);
