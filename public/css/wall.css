@@ -98,3 +98,16 @@
   background-repeat: no-repeat;
   animation-duration: 1.5s;
 }
+.red-pack-img-wrap {
+  width: 8rem;
+  height: 14.5rem;
+  position: absolute;
+  z-index: 7;
+  left: 50%;
+  top: 50%;
+  margin-left: -4rem;
+  margin-top: -7.25rem;
+  background: transparent center center no-repeat;
+  background-size: cover;
+  display: none;
+}

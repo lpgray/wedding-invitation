@@ -6,3 +6,4 @@ wishes_production
 *.mp3
 package-lock.json
 .env
+red-pack

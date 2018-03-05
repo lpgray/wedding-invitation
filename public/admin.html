@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>管理端 - 张杨甘会丽婚礼</title>
+  <link rel="stylesheet" href="./lib/normalize.css">
+  <link rel="stylesheet" href="./lib/animate.min.css">
+  <style>
+    body {
+      padding: 10px 20px;
+      font-size: 13px;
+    }
+
+    h2 small {
+      color: #888;
+    }
+
+    label {
+      display: inline-block;
+      width: 70px;
+      text-align: right;
+      padding-right: 10px;
+    }
+
+    input {
+      border: 1px solid #ccc;
+      padding: 5px;
+      border-radius: 4px;
+      outline: none;
+    }
+
+    input[type="radio"] {
+      display: inline-block;
+      vertical-align: middle;
+      margin-top: -2px;
+    }
+
+    button {
+      background: #444;
+      color: #fff;
+      border-radius: 4px;
+      padding: 5px 10px;
+      border: none;
+      outline: none;
+    }
+
+    .br {
+      height: 15px;
+    }
+
+    .split {
+      display: inline-block;
+      width: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <h2 class="tc">管理后台
+    <small>红包管理</small>
+  </h2>
+  <form>
+    <label for="pwd">密码</label>
+    <input name="pwd" type="password" />
+    <div class="br"></div>
+    <label for="url">图片地址</label>
+    <input name="url" type="text" />
+    <div class="br"></div>
+    <label for="status">状态</label>
+    <input name="status" type="radio" checked value="CLOSE" />关
+    <span class="split"></span>
+    <input name="status" type="radio" value="OPEN" />开
+    <div class="br"></div>
+    <label for=""></label>
+    <button type="submit">提交</button>
+  </form>
+  <script src="./lib/jquery/jquery.min.js"></script>
+  <script>
+    $('form').on('submit', function(e) {
+      e.preventDefault();
+      var pwd = $('input[name=pwd]').val();
+      var url = $('input[name=url]').val();
+      var status = $('input[name=status]:checked').val();
+      if (pwd && url && status) {
+        $.post('/red-pack', {
+          pwd: pwd,
+          url: url,
+          status: status
+        }, function(res) {
+          if (res.success) {
+            alert(JSON.stringify(res.data));
+          } else {
+            alert(res.msg);
+          }
+        }, 'json');
+      }
+    });
+  </script>
+</body>
+
+</html>

@@ -102,5 +102,21 @@
     }
   }
   glb.sendWish = sendWish;
+
+  // 请求红包图片地址
+  $.get('/red-pack', function(res) {
+    if (res.success && res.data) {
+      var img = new Image();
+      img.onload = function() {
+        $('#J-Red-Pack').css({
+          'background-image': 'url(' + res.data + ')',
+          display: 'block'
+        }).animateCss('zoomIn');
+      }
+      img.src = res.data;
+    } else {
+      $('#J-Frame-Post').show();
+    }
+  }, 'json');
   
 }(window.jQuery, window));

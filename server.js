@@ -36,7 +36,7 @@ function requestWxTicket(callback) {
           wxAccessTokenLastTimeGot = Date.now();
           console.log('wxAccessToken', wxAccessToken);
           request(
-            'https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token='+ wxAccessToken +'&type=jsapi',
+            'https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token=' + wxAccessToken + '&type=jsapi',
             function(err, res, body) {
               if (!err) {
                 var data = JSON.parse(body);
@@ -84,12 +84,18 @@ function getWxPublicConfig(url, callback) {
 var fileName = process.env.NODE_ENV === 'production' ? 'wishes_production' : 'wishes';
 var wishesData = [];
 var PORT = process.env.PORT || 8081;
+var redPackStr;
+var redPackFilePath = './red-pack';
 
 if (fs.existsSync('./' + fileName)) {
   var str = fs.readFileSync('./' + fileName);
   if (str) {
     wishesData = JSON.parse(str);
   }
+}
+
+if (!fs.existsSync(redPackFilePath)) {
+  fs.writeFileSync(redPackFilePath, '');
 }
 
 function writeWishesData() {
@@ -145,10 +151,42 @@ app.post('/wishes', function(req, res) {
   });
 });
 app.get('/red-pack', function(req, res) {
-
+  if (!redPackStr) {
+    redPackStr = fs.readFileSync(redPackFilePath).toString();
+  }
+  if (redPackStr) {
+    var redPackObj = JSON.parse(redPackStr);
+    if (redPackObj.status === 'OPEN') {
+      return res.json({
+        success: true,
+        data: redPackObj.url
+      });
+    }
+  }
+  res.json({
+    success: false,
+    msg: 'red pack not open.'
+  });
+  
 });
 app.post('/red-pack', function(req, res) {
-
+  var payload = req.body;
+  if (payload.pwd === process.env.ADMIN_TOKEN) {
+    redPackStr = JSON.stringify({
+      url: payload.url,
+      status: payload.status
+    });
+    fs.writeFileSync(redPackFilePath, redPackStr);
+    res.json({
+      success: true,
+      data: JSON.parse(redPackStr)
+    });
+  } else {
+    res.json({
+      success: false,
+      msg: '密码错误'
+    });
+  }
 });
 app.listen(PORT);
 console.log('server listen on ' + PORT);
