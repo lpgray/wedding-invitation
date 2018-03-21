@@ -108,9 +108,9 @@
   } else {
     // 窄屏方案
     $('body').addClass('vertical');
-    $('#J-MainFrame').css('height', $win.height() - $win.height() * 0.4);
+    $('#J-MainFrame').css('height', $win.height() - $win.height() * 0.45);
     $('#J-BottomBar').css({
-      height: $win.height() * 0.4
+      height: $win.height() * 0.45
     });
   }
 

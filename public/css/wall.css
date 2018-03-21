@@ -51,8 +51,14 @@
 .horizontal .wish-item {
   font-size: .2rem;
 }
+.horizontal .qrcode-wrap img {
+  width: 250px;
+}
 .vertical .wish-item {
   font-size: .3rem;
+}
+.vertical .qrcode-wrap img {
+  width: 160px;
 }
 .frame-wall {
   overflow: hidden;
@@ -132,7 +138,6 @@
   border-radius: 10px;
 }
 .bottom-bar .inner .qrcode-wrap img {
-  width: 250px;
   display: block;
 }
 .bottom-bar .inner .qrcode-wrap .desc {
