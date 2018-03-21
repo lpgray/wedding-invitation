@@ -87,6 +87,7 @@
   appendFrameBorder($frames);
   requestWishes();
   startShowImgs();
+  loopRedPackSignal();
 
   function appendFrameBorder($frames) {
     var $borders = $('<div class="frame-borders wall-borders"><div class="bottom"></div></div>');
@@ -178,6 +179,20 @@
       });
     }
     img1.src = img1Url;
+  }
+
+  
+  function loopRedPackSignal() {
+    $.get('/red-pack-pass', function(res) {
+      if (res.success) {
+        $('#J-RedPackPass').fadeIn(2000).find('.pass-wrap').html(res.data);
+      } else {
+        $('#J-RedPackPass').hide();
+      }
+      setTimeout(function() {
+        loopRedPackSignal();
+      }, 3000);
+    }, 'json');
   }
 
 }(window.jQuery, window));

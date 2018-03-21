@@ -37,6 +37,17 @@
     -webkit-transform: rotate(360deg);
   }
 }
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
 html,
 body {
   background-color: #fcfafa;
@@ -721,4 +732,82 @@ span.cell-split {
   background: transparent center center no-repeat;
   background-size: cover;
   display: none;
+}
+.red-pack-open-wrap {
+  position: fixed;
+  background: #f94c4c;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  top: 0;
+  left: 0;
+  display: none;
+}
+.red-pack-open-wrap .steps {
+  display: flex;
+  color: #fff;
+  margin-top: 0.8rem;
+}
+.red-pack-open-wrap .steps > .step-1,
+.red-pack-open-wrap .steps > .step-2 {
+  flex: 1;
+  text-align: center;
+  font-size: 22px;
+}
+.red-pack-open-wrap .steps > .step-1 h3,
+.red-pack-open-wrap .steps > .step-2 h3 {
+  font-weight: normal;
+}
+.red-pack-open-wrap .steps > .step-1 .img,
+.red-pack-open-wrap .steps > .step-2 .img {
+  width: 248.5px;
+  height: 422px;
+  position: relative;
+  margin: auto;
+  border: 8px solid #fff;
+  border-radius: 10px;
+}
+.red-pack-open-wrap .steps > .step-1 .img:before,
+.red-pack-open-wrap .steps > .step-2 .img:before,
+.red-pack-open-wrap .steps > .step-1 .img:after,
+.red-pack-open-wrap .steps > .step-2 .img:after {
+  content: " ";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent center center no-repeat;
+  background-size: cover;
+  z-index: 1;
+}
+.red-pack-open-wrap .steps > .step-1 .img:after,
+.red-pack-open-wrap .steps > .step-2 .img:after {
+  z-index: 2;
+  animation: fadeInOut 4s ease-in-out 2s infinite;
+}
+.red-pack-open-wrap .steps > .step-1 .img:before {
+  background-image: url(http://7xq1q6.com1.z0.glb.clouddn.com/red-pack-guide-1.jpg);
+}
+.red-pack-open-wrap .steps > .step-1 .img:after {
+  background-image: url(http://7xq1q6.com1.z0.glb.clouddn.com/red-pack-cover-1.png);
+}
+.red-pack-open-wrap .steps > .step-2 .img:before {
+  background-image: url(http://7xq1q6.com1.z0.glb.clouddn.com/red-pack-guide-2.jpg);
+}
+.red-pack-open-wrap .steps > .step-2 .img:after {
+  background-image: url(http://7xq1q6.com1.z0.glb.clouddn.com/red-pack-cover-2.png);
+}
+.red-pack-open-wrap .pass-wrap {
+  width: 500px;
+  background-color: #ffc06f;
+  color: #353232;
+  font-weight: 900;
+  height: 80px;
+  border-radius: 10px;
+  margin: .5rem auto 0;
+  line-height: 80px;
+  text-align: center;
+  letter-spacing: 5px;
+  font-size: 34px;
 }

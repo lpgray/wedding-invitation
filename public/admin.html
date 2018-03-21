@@ -59,8 +59,9 @@
 </head>
 
 <body>
-  <h2 class="tc">管理后台
-    <small>红包管理</small>
+  <h1>管理后台</h1>
+  <!-- <h2 class="tc">
+    <small>手机端红包图片</small>
   </h2>
   <form>
     <label for="pwd">密码</label>
@@ -76,18 +77,36 @@
     <div class="br"></div>
     <label for=""></label>
     <button type="submit">提交</button>
+  </form> -->
+  <h2 class="tc">
+    <small>祝福墙口令管理</small>
+  </h2>
+  <form>
+    <label for="pwd">密码</label>
+    <input name="pwd" type="password" />
+    <div class="br"></div>
+    <label for="pass">口令</label>
+    <input name="pass" type="text" />
+    <div class="br"></div>
+    <label for="status">状态</label>
+    <input name="status" type="radio" checked value="CLOSE" />关
+    <span class="split"></span>
+    <input name="status" type="radio" value="OPEN" />开
+    <div class="br"></div>
+    <label for=""></label>
+    <button type="submit">提交</button>
   </form>
   <script src="./lib/jquery/jquery.min.js"></script>
   <script>
     $('form').on('submit', function(e) {
       e.preventDefault();
       var pwd = $('input[name=pwd]').val();
-      var url = $('input[name=url]').val();
+      var pass = $('input[name=pass]').val();
       var status = $('input[name=status]:checked').val();
-      if (pwd && url && status) {
-        $.post('/red-pack', {
+      if (pwd && pass && status) {
+        $.post('/red-pack-pass', {
           pwd: pwd,
-          url: url,
+          pass: pass,
           status: status
         }, function(res) {
           if (res.success) {

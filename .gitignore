@@ -7,3 +7,4 @@ wishes_production
 package-lock.json
 .env
 red-pack
+red-pack-pass

@@ -80,12 +80,17 @@ function getWxPublicConfig(url, callback) {
     }
   });
 }
-
+var redPackStatus = {
+  open: 'OPEN',
+  close: 'CLOSE'
+}
 var fileName = process.env.NODE_ENV === 'production' ? 'wishes_production' : 'wishes';
 var wishesData = [];
 var PORT = process.env.PORT || 8081;
 var redPackStr;
+var redPackPassStr;
 var redPackFilePath = './red-pack';
+var redPackPassPath = './red-pack-pass';
 
 if (fs.existsSync('./' + fileName)) {
   var str = fs.readFileSync('./' + fileName);
@@ -96,6 +101,9 @@ if (fs.existsSync('./' + fileName)) {
 
 if (!fs.existsSync(redPackFilePath)) {
   fs.writeFileSync(redPackFilePath, '');
+}
+if (!fs.existsSync(redPackPassPath)) {
+  fs.writeFileSync(redPackPassPath, '');
 }
 
 function writeWishesData() {
@@ -167,7 +175,6 @@ app.get('/red-pack', function(req, res) {
     success: false,
     msg: 'red pack not open.'
   });
-  
 });
 app.post('/red-pack', function(req, res) {
   var payload = req.body;
@@ -181,6 +188,46 @@ app.post('/red-pack', function(req, res) {
       success: true,
       data: JSON.parse(redPackStr)
     });
+  } else {
+    res.json({
+      success: false,
+      msg: '密码错误'
+    });
+  }
+});
+app.get('/red-pack-pass', function(req, res) {
+  if (!redPackPassStr) {
+    redPackPassStr = fs.readFileSync(redPackPassPath).toString();
+  }
+  if (redPackPassStr) {
+    var redPackObj = JSON.parse(redPackPassStr);
+    if (redPackObj.status === redPackStatus.open) {
+      return res.json({
+        success: true,
+        data: redPackObj.pass
+      });
+    }
+  }
+  res.json({
+    success: false,
+    msg: 'red pack pass not open.'
+  });
+});
+app.post('/red-pack-pass', function(req, res) {
+  var payload = req.body;
+  if (payload.pwd === process.env.ADMIN_TOKEN) {
+    redPackPassStr = JSON.stringify({
+      pass: payload.pass,
+      status: payload.status
+    });
+    fs.writeFileSync(redPackPassPath, redPackPassStr);
+    res.json({
+      success: true,
+      data: JSON.parse(redPackPassStr)
+    });
+    if (payload.status === redPackStatus.close) {
+      redPackPassStr = '';
+    }
   } else {
     res.json({
       success: false,
