@@ -91,6 +91,7 @@
 
   if ($win.height() <= $win.width()) {
     // 宽屏方案
+    $('body').addClass('horizontal');
     $('#J-MainFrame').css({
       height: $win.height(),
       width: $win.width() - $win.width() * 0.5
@@ -106,6 +107,7 @@
     });
   } else {
     // 窄屏方案
+    $('body').addClass('vertical');
     $('#J-MainFrame').css('height', $win.height() - $win.height() * 0.4);
     $('#J-BottomBar').css({
       height: $win.height() * 0.4

@@ -620,6 +620,12 @@ span.cell-split {
   left: 0;
   z-index: 6;
 }
+.horizontal .wish-item {
+  font-size: .2rem;
+}
+.vertical .wish-item {
+  font-size: .3rem;
+}
 .frame-wall {
   overflow: hidden;
 }
@@ -654,7 +660,6 @@ span.cell-split {
   margin-top: 20px;
 }
 .frame-wall .wish-item {
-  font-size: .2rem;
   background-color: rgba(255, 255, 255, 0.8);
   border-radius: 18px;
   box-shadow: 0 10px 10px rgba(187, 187, 187, 0.2);
