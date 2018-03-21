@@ -633,7 +633,7 @@ span.cell-split {
 .frame-wall h2 {
   position: absolute;
   z-index: 4;
-  font-size: 30px;
+  font-size: 32px;
   margin: 0;
   width: 100%;
   text-align: center;
@@ -654,7 +654,7 @@ span.cell-split {
   margin-top: 20px;
 }
 .frame-wall .wish-item {
-  font-size: 26px;
+  font-size: .2rem;
   background-color: rgba(255, 255, 255, 0.8);
   border-radius: 18px;
   box-shadow: 0 10px 10px rgba(187, 187, 187, 0.2);
@@ -677,7 +677,7 @@ span.cell-split {
   position: fixed;
   width: 100%;
   padding: 0;
-  box-shadow: 0 -8px 8px rgba(78, 78, 78, 0.2);
+  box-shadow: 0 -2px 2px rgba(78, 78, 78, 0.1);
 }
 .bottom-bar .inner {
   border-radius: 18px;
@@ -687,17 +687,19 @@ span.cell-split {
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  height: 100%;
 }
 .bottom-bar .inner .qrcode-wrap {
-  background-color: #fff;
-  border-top: 1px solid #eee;
-  border-bottom: 1px solid #eee;
-  padding: 10px 10px 5px 10px;
-  height: 150px;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 10px;
+  position: absolute;
+  z-index: 5;
+  right: 20px;
+  bottom: 20px;
+  border-radius: 10px;
 }
 .bottom-bar .inner .qrcode-wrap img {
-  width: 110px;
-  height: 110px;
+  width: 250px;
   display: block;
 }
 .bottom-bar .inner .qrcode-wrap .desc {
@@ -709,16 +711,15 @@ span.cell-split {
 .bottom-bar .inner .img-item-wrapper {
   flex: 1;
   height: 100%;
-  height: 150px;
-  background-color: #fff;
+  background-color: #000;
   overflow: hidden;
 }
 .bottom-bar .inner .img-item-wrapper .img-item {
   height: 100%;
-  background-position: center top;
+  background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
-  animation-duration: 1.5s;
+  animation-duration: .5s;
 }
 .red-pack-img-wrap {
   width: 8rem;

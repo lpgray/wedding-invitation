@@ -66,28 +66,51 @@
   var $frames = $('.frame');
   var wishes = [];
   var photos = [
-    'http://7xq1q6.com1.z0.glb.clouddn.com/wedding/1-n.jpg',
-    'http://7xq1q6.com1.z0.glb.clouddn.com/wedding/h-1.jpg',
-    'http://7xq1q6.com1.z0.glb.clouddn.com/wedding/3.jpg',
-    'http://7o52me.com1.z0.glb.clouddn.com/black-1.jpg',
-    'http://7xq1q6.com1.z0.glb.clouddn.com/wedding/h-2.jpg',
-    'http://7o52me.com1.z0.glb.clouddn.com/black-2.jpg',
-    'http://7xq1q6.com1.z0.glb.clouddn.com/wedding/h-3.jpg',
-    'http://7xq1q6.com1.z0.glb.clouddn.com/wedding/7.jpg',
-    'http://7xq1q6.com1.z0.glb.clouddn.com/wedding/h-4.jpg',
-    'http://7xq1q6.com1.z0.glb.clouddn.com/wedding/h-5.jpg',
-    'http://7xq1q6.com1.z0.glb.clouddn.com/wedding/10.jpg',
-    'http://7xq1q6.com1.z0.glb.clouddn.com/wedding/h-6.jpg',
-    'http://7o52me.com1.z0.glb.clouddn.com/add-2.jpeg',
   ];
   var photosPauseTime = 5000;
 
   $html.css('font-size', ($win.width() / 10) + 'px');
-  $('#J-MainFrame').css('height', ($body.height() - 150));
+
+  // http://7o52me.com1.z0.glb.clouddn.com/
+  // 添加图片 001-045
+  for (var i = 1; i <= 45; i++) {
+    var s = new String(i);
+    var zeroNum = 3 - s.length;
+    var fileName = '';
+    for (var j = 0; j < zeroNum; j++) {
+      fileName += '0';
+    }
+    fileName += s;
+    photos.push(`http://7o52me.com1.z0.glb.clouddn.com/${fileName}.jpg`);
+  }
+  
   appendFrameBorder($frames);
   requestWishes();
   startShowImgs();
   loopRedPackSignal();
+
+  if ($win.height() <= $win.width()) {
+    // 宽屏方案
+    $('#J-MainFrame').css({
+      height: $win.height(),
+      width: $win.width() - $win.width() * 0.5
+    });
+    $('#J-Wishes').css('padding', '.5rem');
+    $('#J-BottomBar').css({
+      right: 0,
+      left: 'auto',
+      top: 0,
+      bootom: 'auto',
+      width: $win.width() * 0.5,
+      height: $win.height()
+    });
+  } else {
+    // 窄屏方案
+    $('#J-MainFrame').css('height', $win.height() - $win.height() * 0.4);
+    $('#J-BottomBar').css({
+      height: $win.height() * 0.4
+    });
+  }
 
   function appendFrameBorder($frames) {
     var $borders = $('<div class="frame-borders wall-borders"><div class="bottom"></div></div>');
@@ -149,7 +172,7 @@
   function showImgs() {
     var img = new Image();
     var lastIdx = $('#J-Img0').data('last-url-index');
-    var idx = typeof lastIdx !== 'undefined' ? lastIdx + 2 : anchor;
+    var idx = typeof lastIdx !== 'undefined' ? lastIdx + 1 : anchor;
     if (idx >= photos.length) {
       idx = 0;
     }
@@ -159,26 +182,27 @@
         $('#J-Img0').css({
           'background-image': 'url(' + imgUrl + ')'
         }).animateCss('fadeIn').data('last-url-index', idx);
+        setTimeout(showImgs, photosPauseTime);
       });
     }
     img.src = imgUrl;
 
-    var img1 = new Image();
-    var lastIdx1 = $('#J-Img1').data('last-url-index');
-    var idx1 = typeof lastIdx1 !== 'undefined' ? lastIdx1 + 2 : anchor + 1;
-    if (idx1 >= photos.length) {
-      idx1 = 1;
-    }
-    var img1Url = photos[idx1];
-    img1.onload = function() {
-      $('#J-Img1').animateCss('fadeOut', function() {
-        $('#J-Img1').css({
-          'background-image': 'url(' + img1Url + ')'
-        }).animateCss('fadeIn').data('last-url-index', idx1);
-        setTimeout(showImgs, photosPauseTime);
-      });
-    }
-    img1.src = img1Url;
+    // var img1 = new Image();
+    // var lastIdx1 = $('#J-Img1').data('last-url-index');
+    // var idx1 = typeof lastIdx1 !== 'undefined' ? lastIdx1 + 2 : anchor + 1;
+    // if (idx1 >= photos.length) {
+    //   idx1 = 1;
+    // }
+    // var img1Url = photos[idx1];
+    // img1.onload = function() {
+    //   $('#J-Img1').animateCss('fadeOut', function() {
+    //     $('#J-Img1').css({
+    //       'background-image': 'url(' + img1Url + ')'
+    //     }).animateCss('fadeIn').data('last-url-index', idx1);
+    //     setTimeout(showImgs, photosPauseTime);
+    //   });
+    // }
+    // img1.src = img1Url;
   }
 
   
