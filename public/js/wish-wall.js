@@ -120,7 +120,7 @@
       left: 'auto',
       top: 0,
       bootom: 'auto',
-      width: $win.width() * 0.5,
+      width: $win.width(),
       height: $win.height()
     });
   } else {
@@ -129,7 +129,7 @@
     $('body').addClass('vertical');
     $('#J-MainFrame').css('height', $win.height() - $win.height() * 0.5);
     $('#J-BottomBar').css({
-      height: $win.height() * 0.5
+      height: $win.height()
     });
   }
 
@@ -143,8 +143,9 @@
   function requestWishes() {
     $.get('/wishes', function(res) {
       if (res.success) {
-        onGetWishes(res);
-        setTimeout(scrollWishes, 1000);
+        // onGetWishes(res);
+        // setTimeout(scrollWishes, 1000);
+        onGetWishesV2(res.data);
       }
     }, 'json');
   }
@@ -164,6 +165,21 @@
     }
     tmpl += '</div>';
     $('#J-Wishes').html(tmpl);
+  }
+
+  function onGetWishesV2(wishes) {
+    var firstItem = wishes.splice(0, 1)[0];
+    var tmpl = '<div class="wish-2-item">';
+    tmpl += ' <strong>' + firstItem.name + '</strong>：' + firstItem.text;
+    tmpl += '</div>';
+    $('#J-WishWrap2').html(tmpl);
+    if (wishes.length) {
+      setTimeout(function() {
+        onGetWishesV2(wishes);
+      }, photosPauseTime);
+    } else {
+      requestWishes();
+    }
   }
 
   function scrollWishes() {
@@ -200,7 +216,7 @@
     var imgUrl = photos[idx].url;
     var extCss = photos[idx].css;
     img.onload = function() {
-      if ((img.width < img.height && sizeMode === sizeModes.vertical) || (img.width > img.height && sizeMode === sizeModes.horizontal)) {
+      if ((img.width < img.height && sizeMode === sizeModes.horizontal) || (img.width > img.height && sizeMode === sizeModes.vertical)) {
         $('#J-Img0').data('last-url-index', idx);
         showImgs();
         return;

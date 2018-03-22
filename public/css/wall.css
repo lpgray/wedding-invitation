@@ -58,6 +58,12 @@
 .horizontal .qrcode-wrap img {
   width: 250px;
 }
+.horizontal .wishes-wrap-2 .wish-2-item {
+  font-size: .2rem;
+  margin-left: 250px;
+  margin-right: 290px;
+  padding: 30px;
+}
 .vertical .wish-item {
   font-size: .4rem;
 }
@@ -66,7 +72,7 @@
   bottom: 20px;
 }
 .vertical .qrcode-wrap img {
-  width: 160px;
+  width: 170px;
 }
 .frame-wall {
   overflow: hidden;
@@ -243,4 +249,19 @@
   text-align: center;
   letter-spacing: 5px;
   font-size: 34px;
+}
+.wishes-wrap-2 {
+  position: absolute;
+  width: 100%;
+  bottom: 20px;
+  right: 20px;
+}
+.wishes-wrap-2 .wish-2-item {
+  margin-left: 250px;
+  font-size: .45rem;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 20px;
+  border-radius: 10px;
+  line-height: 1.4;
 }

@@ -1,5 +1,10 @@
 @import "./lib/theme";
 @import "./lib/animate";
+
+
+@vertical-img-size: 170px;
+@horizontal-img-size: 250px;
+
 .horizontal {
   .wish-item {
     font-size: .2rem;
@@ -8,7 +13,15 @@
     right: 20px;
     bottom: 20px;
     img {
-      width: 250px;
+      width: @horizontal-img-size;
+    }
+  }
+  .wishes-wrap-2 {
+    .wish-2-item {
+      font-size: .2rem;
+      margin-left: @horizontal-img-size;
+      margin-right: @horizontal-img-size + 40;
+      padding: 30px;
     }
   }
 }
@@ -21,7 +34,7 @@
     left: 20px;
     bottom: 20px;
     img {
-      width: 160px;
+      width: @vertical-img-size;
     }
   }
 }
@@ -208,5 +221,21 @@
     text-align: center;
     letter-spacing: 5px;
     font-size: 34px;
+  }
+}
+
+.wishes-wrap-2 {
+  position: absolute;
+  width: 100%;
+  bottom: 20px;
+  right: 20px;
+  .wish-2-item {
+    margin-left: @vertical-img-size + 80;
+    font-size: .45rem;
+    color: #fff;
+    background: rgba(0,0,0,.7);
+    padding: 20px;
+    border-radius: 10px;
+    line-height: 1.4;
   }
 }
