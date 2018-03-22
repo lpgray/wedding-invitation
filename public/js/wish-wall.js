@@ -67,7 +67,7 @@
   var wishes = [];
   var photos = [
   ];
-  var photosPauseTime = 5000;
+  var photosPauseTime = 10000;
   var sizeModes = {
     horizontal: 'h',
     vertical: 'v'

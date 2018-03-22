@@ -637,14 +637,14 @@ span.cell-split {
   padding: 30px;
 }
 .vertical .wish-item {
-  font-size: .4rem;
+  font-size: .45rem;
 }
 .vertical .qrcode-wrap {
   left: 20px;
   bottom: 20px;
 }
 .vertical .qrcode-wrap img {
-  width: 1rem;
+  width: 3rem;
 }
 .frame-wall {
   overflow: hidden;
@@ -829,8 +829,8 @@ span.cell-split {
   right: 20px;
 }
 .wishes-wrap-2 .wish-2-item {
-  margin-left: 81rem;
-  font-size: .45rem;
+  margin-left: 4.3rem;
+  font-size: .5rem;
   color: #fff;
   background: rgba(0, 0, 0, 0.7);
   padding: 20px;
