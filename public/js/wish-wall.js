@@ -68,6 +68,11 @@
   var photos = [
   ];
   var photosPauseTime = 5000;
+  var sizeModes = {
+    horizontal: 'h',
+    vertical: 'v'
+  };
+  var sizeMode;
 
   $html.css('font-size', ($win.width() / 10) + 'px');
 
@@ -81,7 +86,19 @@
       fileName += '0';
     }
     fileName += s;
-    photos.push(`http://7o52me.com1.z0.glb.clouddn.com/${fileName}.jpg`);
+    var o = {
+      url: `http://7o52me.com1.z0.glb.clouddn.com/${fileName}.jpg`
+    };
+    if (i === 8 || i === 2 || i === 11 ) {
+      o.css = {
+        'background-position': 'center center'
+      };
+    } else {
+      o.css = {
+        'background-position': 'center center'
+      };
+    }
+    photos.push(o);
   }
   
   appendFrameBorder($frames);
@@ -91,6 +108,7 @@
 
   if ($win.height() <= $win.width()) {
     // 宽屏方案
+    sizeMode = sizeModes.horizontal;
     $('body').addClass('horizontal');
     $('#J-MainFrame').css({
       height: $win.height(),
@@ -107,10 +125,11 @@
     });
   } else {
     // 窄屏方案
+    sizeMode = sizeModes.vertical;
     $('body').addClass('vertical');
-    $('#J-MainFrame').css('height', $win.height() - $win.height() * 0.45);
+    $('#J-MainFrame').css('height', $win.height() - $win.height() * 0.5);
     $('#J-BottomBar').css({
-      height: $win.height() * 0.45
+      height: $win.height() * 0.5
     });
   }
 
@@ -178,12 +197,23 @@
     if (idx >= photos.length) {
       idx = 0;
     }
-    var imgUrl = photos[idx];
+    var imgUrl = photos[idx].url;
+    var extCss = photos[idx].css;
     img.onload = function() {
+      if ((img.width < img.height && sizeMode === sizeModes.vertical) || (img.width > img.height && sizeMode === sizeModes.horizontal)) {
+        $('#J-Img0').data('last-url-index', idx);
+        showImgs();
+        return;
+      }
       $('#J-Img0').animateCss('fadeOut', function() {
-        $('#J-Img0').css({
+        var css = {
           'background-image': 'url(' + imgUrl + ')'
-        }).animateCss('fadeIn').data('last-url-index', idx);
+        };
+        if (extCss) {
+          extCss['background-image'] = 'url(' + imgUrl + ')';
+          css = extCss;
+        }
+        $('#J-Img0').css(css).animateCss('fadeIn').data('last-url-index', idx);
         setTimeout(showImgs, photosPauseTime);
       });
     }

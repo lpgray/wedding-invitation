@@ -1,21 +1,25 @@
 @import "./lib/theme";
 @import "./lib/animate";
-
 .horizontal {
   .wish-item {
     font-size: .2rem;
   }
   .qrcode-wrap {
+    right: 20px;
+    bottom: 20px;
     img {
       width: 250px;
     }
   }
 }
+
 .vertical {
   .wish-item {
-    font-size: .3rem;
+    font-size: .4rem;
   }
   .qrcode-wrap {
+    left: 20px;
+    bottom: 20px;
     img {
       width: 160px;
     }
@@ -81,46 +85,32 @@
   position: fixed;
   width: 100%;
   padding: 0;
-  box-shadow: 0 -2px 2px rgba(78, 78, 78, 0.1);
-  .inner {
-    border-radius: 18px;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    .qrcode-wrap {
-      background-color: rgba(0,0,0,.5);
-      padding: 10px;
-      position: absolute;
-      z-index: 5;
-      right: 20px;
-      bottom: 20px;
-      border-radius: 10px;
-      img {
-        display: block;
-      }
-      .desc {
-        font-size: 16px;
-        color: lighten(@primary, 15%);
-        line-height: 1.6;
-        text-align: center;
-      }
+  .qrcode-wrap {
+    background-color: rgba(0, 0, 0, .5);
+    padding: 10px;
+    position: absolute;
+    z-index: 5;
+    border-radius: 10px;
+    img {
+      display: block;
     }
-    .img-item-wrapper {
-      flex: 1;
+    .desc {
+      font-size: 16px;
+      color: lighten(@primary, 15%);
+      line-height: 1.6;
+      text-align: center;
+    }
+  }
+  .img-item-wrapper {
+    height: 100%;
+    background-color: #000;
+    overflow: hidden;
+    .img-item {
       height: 100%;
-      background-color: #000;
-      overflow: hidden;
-      .img-item {
-        height: 100%;
-        background-position: center center;
-        background-size: cover;
-        background-repeat: no-repeat;
-        animation-duration: .5s;
-      }
+      background-position: center center;
+      background-size: cover;
+      background-repeat: no-repeat;
+      animation-duration: .5s;
     }
   }
 }
@@ -152,8 +142,8 @@
     display: flex;
     color: #fff;
     margin-top: 0.8rem;
-    & > .step-1,
-    & > .step-2 {
+    &>.step-1,
+    &>.step-2 {
       flex: 1;
       text-align: center;
       font-size: 22px;
@@ -167,7 +157,8 @@
         margin: auto;
         border: 8px solid #fff;
         border-radius: 10px;
-        &:before, &:after {
+        &:before,
+        &:after {
           content: " ";
           position: absolute;
           top: 0;
@@ -184,7 +175,7 @@
         }
       }
     }
-    & > .step-1 {
+    &>.step-1 {
       .img {
         &:before {
           background-image: url(http://7xq1q6.com1.z0.glb.clouddn.com/red-pack-guide-1.jpg);
@@ -194,7 +185,7 @@
         }
       }
     }
-    & > .step-2 {
+    &>.step-2 {
       .img {
         &:before {
           background-image: url(http://7xq1q6.com1.z0.glb.clouddn.com/red-pack-guide-2.jpg);

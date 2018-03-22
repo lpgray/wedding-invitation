@@ -51,11 +51,19 @@
 .horizontal .wish-item {
   font-size: .2rem;
 }
+.horizontal .qrcode-wrap {
+  right: 20px;
+  bottom: 20px;
+}
 .horizontal .qrcode-wrap img {
   width: 250px;
 }
 .vertical .wish-item {
-  font-size: .3rem;
+  font-size: .4rem;
+}
+.vertical .qrcode-wrap {
+  left: 20px;
+  bottom: 20px;
 }
 .vertical .qrcode-wrap img {
   width: 160px;
@@ -116,43 +124,29 @@
   position: fixed;
   width: 100%;
   padding: 0;
-  box-shadow: 0 -2px 2px rgba(78, 78, 78, 0.1);
 }
-.bottom-bar .inner {
-  border-radius: 18px;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-}
-.bottom-bar .inner .qrcode-wrap {
+.bottom-bar .qrcode-wrap {
   background-color: rgba(0, 0, 0, 0.5);
   padding: 10px;
   position: absolute;
   z-index: 5;
-  right: 20px;
-  bottom: 20px;
   border-radius: 10px;
 }
-.bottom-bar .inner .qrcode-wrap img {
+.bottom-bar .qrcode-wrap img {
   display: block;
 }
-.bottom-bar .inner .qrcode-wrap .desc {
+.bottom-bar .qrcode-wrap .desc {
   font-size: 16px;
   color: #7d87d3;
   line-height: 1.6;
   text-align: center;
 }
-.bottom-bar .inner .img-item-wrapper {
-  flex: 1;
+.bottom-bar .img-item-wrapper {
   height: 100%;
   background-color: #000;
   overflow: hidden;
 }
-.bottom-bar .inner .img-item-wrapper .img-item {
+.bottom-bar .img-item-wrapper .img-item {
   height: 100%;
   background-position: center center;
   background-size: cover;
