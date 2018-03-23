@@ -13,8 +13,20 @@ gulp.task('css', function(){
     .pipe(gulp.dest('./public/css'))
 });
 
-gulp.task('default', [ 'css' ]);
+gulp.task('css.1', function(){
+  return gulp.src('./public/less.1/*.less')
+    .pipe(less())
+    .on('error', function(e) {
+      console.log(e);
+      this.emit('end');
+    })
+    // .pipe(minifyCSS())
+    .pipe(gulp.dest('./public/css.1'))
+});
+
+gulp.task('default', [ 'css', 'css.1' ]);
 
 gulp.task('develop', function() {
-  gulp.watch('./public/less/**/*.less', [ 'css' ]);
+  gulp.watch('./public/less/**/*.less', ['css']);
+  gulp.watch('./public/less.1/**/*.less', [ 'css.1' ]);
 });

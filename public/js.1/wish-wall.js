@@ -1,0 +1,321 @@
+(function($, glb) {
+  'use strict';
+
+  // 动画插件 from https://daneden.github.io/animate.css/
+  $.fn.extend({
+    animateCss: function(animationName, callback) {
+      var animationEnd = (function(el) {
+        var animations = {
+          animation: 'animationend',
+          OAnimation: 'oAnimationEnd',
+          MozAnimation: 'mozAnimationEnd',
+          WebkitAnimation: 'webkitAnimationEnd',
+        };
+
+        for (var t in animations) {
+          if (el.style[t] !== undefined) {
+            return animations[t];
+          }
+        }
+      })(document.createElement('div'));
+
+      this.removeClass('animate-init').addClass('animated ' + animationName).one(animationEnd, function() {
+        $(this).removeClass('animated ' + animationName);
+
+        if (typeof callback === 'function') callback();
+      });
+
+      return this;
+    },
+    makeAnimate: function() {
+      this.timeout = [];
+      var _ = this;
+      this.find('.animate').each(function(i) {
+        var $this = $(this);
+        var delay = Number($this.data('delay'));
+        var animateName = $this.data('animate') || 'flipInX';
+        if (animateName) {
+          if (delay === 0) {
+            $this.animateCss(animateName);
+          } else {
+            _.timeout[i] = setTimeout(function() {
+              $this.animateCss(animateName);
+            }, delay);
+          }
+        }
+      });
+      return this;
+    },
+    resetAnimate: function() {
+      if (this.timeout) {
+        this.timeout.forEach(function(i) {
+          clearTimeout(this.timeout[i]);
+        });
+      }
+      this.find('.animate').each(function() {
+        var $this = $(this);
+        $this.addClass('animate-init');
+      });
+      return this;
+    }
+  });
+
+  var $html = $('html');
+  var $body = $('body');
+  var $win = $(window);
+  var $frames = $('.frame');
+  var wishes = [];
+  var photos = [
+  ];
+  var photosPauseTime = 10000;
+  var sizeModes = {
+    horizontal: 'h',
+    vertical: 'v'
+  };
+  var sizeMode;
+  var defaultSize = {
+    width: 625,
+    height: 750
+  }
+
+  $html.css('font-size', (defaultSize.width / 10) + 'px');
+
+  var $wrap = $('.wish-wall-wrap');
+  if (location.search.indexOf('b') > -1) {
+    $('.qrcode-wrap').hide();
+    sizeMode = sizeModes.horizontal;
+    $('body').addClass('vertical');
+    $wrap.css({
+      width: $win.width(),
+      height: $win.height()
+    });
+  } else {
+    sizeMode = sizeModes.vertical;
+    $('body').addClass('vertical');
+    $wrap.css('transform', 'scaleX(' + $win.width() / defaultSize.width + ') scaleY(' + $win.height() / defaultSize.height + ')');
+  }
+
+  // http://7o52me.com1.z0.glb.clouddn.com/
+  // 添加图片 001-045
+  for (var i = 1; i <= 45; i++) {
+    var s = new String(i);
+    var zeroNum = 3 - s.length;
+    var fileName = '';
+    for (var j = 0; j < zeroNum; j++) {
+      fileName += '0';
+    }
+    fileName += s;
+    var o = {
+      url: `http://7o52me.com1.z0.glb.clouddn.com/${fileName}.jpg`
+    };
+    if (i === 8 || i === 2 || i === 11 ) {
+      o.css = {
+        'background-position': 'center center'
+      };
+    } else {
+      o.css = {
+        'background-position': 'center center'
+      };
+    }
+    photos.push(o);
+  }
+  
+  appendFrameBorder($frames);
+  requestWishes();
+  startShowImgs();
+  loopRedPackSignal();
+
+  // if ($win.height() <= $win.width()) {
+  //   // 宽屏方案
+  //   sizeMode = sizeModes.horizontal;
+  //   $('body').addClass('horizontal');
+  //   $('#J-MainFrame').css({
+  //     height: $win.height(),
+  //     width: $win.width() - $win.width() * 0.5
+  //   });
+  //   $('#J-Wishes').css('padding', '.5rem');
+  //   $('#J-BottomBar').css({
+  //     right: 0,
+  //     left: 'auto',
+  //     top: 0,
+  //     bootom: 'auto',
+  //     width: $win.width(),
+  //     height: $win.height()
+  //   });
+  // } else {
+    // 窄屏方案
+    // sizeMode = sizeModes.vertical;
+    // $('body').addClass('vertical');
+    // $('#J-MainFrame').css('height', $win.height() - $win.height() * 0.5);
+    // $('#J-BottomBar').css({
+    //   height: $win.height()
+    // });
+  // }
+
+  function appendFrameBorder($frames) {
+    var $borders = $('<div class="frame-borders wall-borders"><div class="bottom"></div></div>');
+    $frames.each(function() {
+      $(this).append($borders.clone());
+    });
+  }
+
+  var cachesWishes = [];
+  function requestWishes() {
+    $.ajax({
+      url: '/wishes',
+      method: 'get',
+      dataType: 'json',
+      success: function(res) {
+        if (res.success) {
+          try {
+            cachesWishes = JSON.parse(JSON.stringify(res.data));
+          } catch (e) {
+            console.error('转换服务器数据出错');
+          }
+          onGetWishesV2(res.data);
+        }
+      },
+      error: function() {
+        console.log('error connect wishes');
+        try {
+          onGetWishesV2(JSON.parse(JSON.stringify(cachesWishes)));
+        } catch (e) {
+          console.error('转换服务器数据出错');
+        }
+      }
+    })
+  }
+
+  function onGetWishes(res) {
+    var tmpl = '';
+    wishes = res.data;
+    for (var i = 0, l = wishes.length; i < l; i++) {
+      tmpl += '<div class="wish-item wish-item-' + i + '">';
+      tmpl += '<span class="name">' + wishes[i].name + '</span>';
+      tmpl += '<span class="body">' + wishes[i].text + '</span>';
+      tmpl += '</div>';
+
+      if (i === 0) {
+        tmpl += '<div class="wish-item-subs-wrap">'
+      }
+    }
+    tmpl += '</div>';
+    $('#J-Wishes').html(tmpl);
+  }
+
+  function onGetWishesV2(wishes) {
+    var firstItem = wishes.splice(0, 1)[0];
+    var tmpl = '<div class="wish-2-item">';
+    tmpl += ' <strong>' + firstItem.name + '</strong>：' + firstItem.text;
+    tmpl += '</div>';
+    $('#J-WishWrap2').html(tmpl);
+    if (wishes.length) {
+      setTimeout(function() {
+        onGetWishesV2(wishes);
+      }, photosPauseTime);
+    } else {
+      requestWishes();
+    }
+  }
+
+  function scrollWishes() {
+    $('.wish-item-0').animateCss('fadeOut', function() {
+      var h = $('.wish-item-0').outerHeight() + 20;
+      $('.wish-item-0').css('visibility', 'hidden');
+      $('.wish-item-subs-wrap').css({
+        'transform': 'translate3d(0, -' + h + 'px, 0)',
+        'transition': 'all .5s ease'
+      }).on('transitionend', function() {
+        wishes.splice(0, 1);
+        if (wishes.length <= 0) {
+          requestWishes();
+          return;
+        }
+        onGetWishes({ data: wishes });
+        setTimeout(scrollWishes, 1000);
+      });
+    });
+  }
+
+  function startShowImgs() {
+    setTimeout(showImgs, photosPauseTime);
+  }
+
+  var anchor = 0;
+  function showImgs() {
+    var img = new Image();
+    var lastIdx = $('#J-Img0').data('last-url-index');
+    var idx = typeof lastIdx !== 'undefined' ? lastIdx + 1 : anchor;
+    if (idx >= photos.length) {
+      idx = 0;
+    }
+    var imgUrl = photos[idx].url;
+    var extCss = photos[idx].css;
+    img.onload = function() {
+      if ((img.width < img.height && sizeMode === sizeModes.horizontal) || (img.width > img.height && sizeMode === sizeModes.vertical)) {
+        $('#J-Img0').data('last-url-index', idx);
+        showImgs();
+        return;
+      }
+      $('#J-Img0').animateCss('fadeOut', function() {
+        var css = {
+          'background-image': 'url(' + imgUrl + ')'
+        };
+        if (extCss) {
+          extCss['background-image'] = 'url(' + imgUrl + ')';
+          css = extCss;
+        }
+        $('#J-Img0').css(css).animateCss('fadeIn').data('last-url-index', idx);
+        setTimeout(showImgs, photosPauseTime);
+      });
+    }
+    img.src = imgUrl;
+
+    // var img1 = new Image();
+    // var lastIdx1 = $('#J-Img1').data('last-url-index');
+    // var idx1 = typeof lastIdx1 !== 'undefined' ? lastIdx1 + 2 : anchor + 1;
+    // if (idx1 >= photos.length) {
+    //   idx1 = 1;
+    // }
+    // var img1Url = photos[idx1];
+    // img1.onload = function() {
+    //   $('#J-Img1').animateCss('fadeOut', function() {
+    //     $('#J-Img1').css({
+    //       'background-image': 'url(' + img1Url + ')'
+    //     }).animateCss('fadeIn').data('last-url-index', idx1);
+    //     setTimeout(showImgs, photosPauseTime);
+    //   });
+    // }
+    // img1.src = img1Url;
+  }
+
+  
+  var reConnectFunc;
+  function loopRedPackSignal() {
+    $.ajax({
+      url: '/red-pack-pass',
+      method: 'get',
+      dataType: 'json',
+      success: function(res) {
+        clearInterval(reConnectFunc);
+        if (res.success) {
+          $('#J-RedPackPass').fadeIn(2000).find('.pass-wrap').html(res.data);
+        } else {
+          $('#J-RedPackPass').hide();
+        }
+        setTimeout(function() {
+          loopRedPackSignal();
+        }, 3000);
+      },
+      error: function() {
+        // 重连中
+        console.log('error loop redpack');
+        clearInterval(reConnectFunc);
+        reConnectFunc = setInterval(function() {
+          loopRedPackSignal();
+        }, 2000);
+      }
+    })
+  }
+
+}(window.jQuery, window));
