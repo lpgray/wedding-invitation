@@ -140,14 +140,31 @@
     });
   }
 
+  var cachesWishes = [];
   function requestWishes() {
-    $.get('/wishes', function(res) {
-      if (res.success) {
-        // onGetWishes(res);
-        // setTimeout(scrollWishes, 1000);
-        onGetWishesV2(res.data);
+    $.ajax({
+      url: '/wishes',
+      method: 'get',
+      dataType: 'json',
+      success: function(res) {
+        if (res.success) {
+          try {
+            cachesWishes = JSON.parse(JSON.stringify(res.data));
+          } catch (e) {
+            console.error('转换服务器数据出错');
+          }
+          onGetWishesV2(res.data);
+        }
+      },
+      error: function() {
+        console.log('error connect wishes');
+        try {
+          onGetWishesV2(JSON.parse(JSON.stringify(cachesWishes)));
+        } catch (e) {
+          console.error('转换服务器数据出错');
+        }
       }
-    }, 'json');
+    })
   }
 
   function onGetWishes(res) {
@@ -254,17 +271,32 @@
   }
 
   
+  var reConnectFunc;
   function loopRedPackSignal() {
-    $.get('/red-pack-pass', function(res) {
-      if (res.success) {
-        $('#J-RedPackPass').fadeIn(2000).find('.pass-wrap').html(res.data);
-      } else {
-        $('#J-RedPackPass').hide();
+    $.ajax({
+      url: '/red-pack-pass',
+      method: 'get',
+      dataType: 'json',
+      success: function(res) {
+        clearInterval(reConnectFunc);
+        if (res.success) {
+          $('#J-RedPackPass').fadeIn(2000).find('.pass-wrap').html(res.data);
+        } else {
+          $('#J-RedPackPass').hide();
+        }
+        setTimeout(function() {
+          loopRedPackSignal();
+        }, 3000);
+      },
+      error: function() {
+        // 重连中
+        console.log('error loop redpack');
+        clearInterval(reConnectFunc);
+        reConnectFunc = setInterval(function() {
+          loopRedPackSignal();
+        }, 2000);
       }
-      setTimeout(function() {
-        loopRedPackSignal();
-      }, 3000);
-    }, 'json');
+    })
   }
 
 }(window.jQuery, window));
